@@ -49,7 +49,7 @@ class CommentAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (val item = itemList[position]) {
             is Item.Video -> {
-                Log.d("item",item.toString())
+                Log.d("item", item.toString())
                 val videoHolder = holder as VideoViewHolder
                 val imageTempUrl = item.video.image
                 val image = ImageDealHelper.convertToHttps(imageTempUrl)
@@ -86,7 +86,7 @@ class CommentAdapter(
             }
 
             is Item.Picture -> {
-                Log.d("item",item.toString())
+                Log.d("item", item.toString())
                 val pictureHolder = holder as PictureViewHolder
 
                 Glide.with(pictureHolder.itemView.context).load(item.picture.picture.trim())
