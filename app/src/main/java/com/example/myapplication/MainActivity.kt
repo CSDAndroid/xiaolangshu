@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             requestPermissions()
         }
 
-        judgeIsLogin()
+//        judgeIsLogin()
         initViewModel()
         initViewPager()
         initRadioGroup()

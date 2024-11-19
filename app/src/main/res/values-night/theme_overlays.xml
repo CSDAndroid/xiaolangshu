@@ -46,10 +46,6 @@
         <item name="colorSurfaceContainer">@color/md_theme_surfaceContainer_mediumContrast</item>
         <item name="colorSurfaceContainerHigh">@color/md_theme_surfaceContainerHigh_mediumContrast</item>
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest_mediumContrast</item>
-        <item name="colorTextColor">@color/colorTextColor_mediumContrast</item>
-        <item name="colorOnTextColor">@color/colorOnTextColor_mediumContrast</item>
-        <item name="colorTextColorContainer">@color/colorTextColorContainer_mediumContrast</item>
-        <item name="colorOnTextColorContainer">@color/colorOnTextColorContainer_mediumContrast</item>
     </style>
     <style name="ThemeOverlay.AppTheme.HighContrast" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary_highContrast</item>
@@ -98,9 +94,5 @@
         <item name="colorSurfaceContainer">@color/md_theme_surfaceContainer_highContrast</item>
         <item name="colorSurfaceContainerHigh">@color/md_theme_surfaceContainerHigh_highContrast</item>
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest_highContrast</item>
-        <item name="colorTextColor">@color/colorTextColor_highContrast</item>
-        <item name="colorOnTextColor">@color/colorOnTextColor_highContrast</item>
-        <item name="colorTextColorContainer">@color/colorTextColorContainer_highContrast</item>
-        <item name="colorOnTextColorContainer">@color/colorOnTextColorContainer_highContrast</item>
     </style>
 </resources>

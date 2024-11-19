@@ -1,67 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/md_theme_background"
     android:orientation="vertical">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/main_viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
-
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottomNavigationView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/white"-->
-<!--        app:itemTextColor="@drawable/navigation_item_selector"-->
-<!--        app:labelVisibilityMode="labeled"-->
-<!--        app:menu="@menu/bottom_navigation__view"-->
-<!--        app:theme="@style/MyBottomNavigationViewStyle"/>-->
+        android:layout_weight="1"
+        android:background="@color/md_theme_surface" />
 
     <RadioGroup
         android:id="@+id/main_navRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:itemTextColor="@drawable/navigation_item_selector"
-        app:labelVisibilityMode="labeled">
+        android:background="@color/md_theme_surfaceContainerHigh_highContrast"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/main"
             style="@style/RadioGroupButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
             android:text="首页"
             android:textColor="@color/navigation_item_selector" />
 
         <RadioButton
             android:id="@+id/picture"
             style="@style/RadioGroupButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
             android:text="图片"
             android:textColor="@color/navigation_item_selector" />
 
         <RadioButton
             android:id="@+id/message"
             style="@style/RadioGroupButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
             android:text="消息"
             android:textColor="@color/navigation_item_selector" />
 
         <RadioButton
             android:id="@+id/mine"
             style="@style/RadioGroupButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
             android:text="我"
             android:textColor="@color/navigation_item_selector" />
 

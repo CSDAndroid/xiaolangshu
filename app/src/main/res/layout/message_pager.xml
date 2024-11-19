@@ -3,7 +3,7 @@
     android:id="@+id/layout_message"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EAE4E4">
+    android:background="@color/md_theme_background">
 
     <TextView
         android:layout_width="match_parent"
@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="该区域尚未开发"
-        android:textColor="@color/black"
+        android:textColor="@color/md_theme_onBackground_mediumContrast"
         android:textSize="20sp" />
 
 </LinearLayout>

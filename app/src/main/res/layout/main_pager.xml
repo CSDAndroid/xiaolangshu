@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/md_theme_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,76 +15,57 @@
             android:id="@+id/main_pager_navRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:itemTextColor="@drawable/navigation_item_selector"
-            app:labelVisibilityMode="labeled">
+            android:background="@color/md_theme_surfaceContainerHigh_highContrast"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/main_pager_navButton"
                 style="@style/RadioGroupButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:background="@drawable/nav_left_background"
-                android:padding="10dp" />
+                android:backgroundTint="@color/md_theme_onSurfaceVariant_mediumContrast" />
 
             <RadioButton
                 android:id="@+id/no1"
-                style="@style/RadioGroupButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp" />
+                style="@style/RadioGroupButtonStyle" />
 
             <RadioButton
                 android:id="@+id/main_pager_focus"
                 style="@style/RadioGroupButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:text="关注"
                 android:textColor="@color/navigation_item_selector" />
 
             <RadioButton
                 android:id="@+id/main_pager_find"
                 style="@style/RadioGroupButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:text="发现"
                 android:textColor="@color/navigation_item_selector" />
 
             <RadioButton
                 android:id="@+id/main_pager_region"
                 style="@style/RadioGroupButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:text="本地"
                 android:textColor="@color/navigation_item_selector" />
 
             <RadioButton
                 android:id="@+id/no2"
                 style="@style/RadioGroupButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:padding="10dp" />
 
             <RadioButton
                 android:id="@+id/main_pager_search"
                 style="@style/RadioGroupButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:background="@drawable/magnifyingglass_background"
-                android:padding="10dp" />
+                android:backgroundTint="@color/md_theme_onSurfaceVariant_mediumContrast" />
 
         </RadioGroup>
 
-        <!-- 主内容区域 -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/main_pager_viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="#EAE4E4" />
+            android:background="@color/md_theme_surface" />
 
     </LinearLayout>
 
@@ -92,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/md_theme_surfaceContainerHigh_mediumContrast"
         app:menu="@menu/main_bottom_navigation" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-        <variable
-            name="prePictureItem"
-            type="com.example.myapplication.viewModel.PictureInfoViewModel" />
-    </data>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape"
+        android:background="@drawable/shape2"
         android:orientation="vertical">
 
         <ImageView
@@ -41,7 +35,7 @@
                 android:layout_gravity="center_vertical"
                 android:maxLength="6"
                 android:text="阿呆"
-                android:textColor="#333333"
+                android:textColor="@color/md_theme_primary"
                 android:textSize="10sp" />
 
             <View
@@ -63,7 +57,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 android:text="1.2万"
-                android:textColor="#333"
+                android:textColor="@color/md_theme_primary"
                 android:textSize="10sp" />
 
         </LinearLayout>

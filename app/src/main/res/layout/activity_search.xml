@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/md_theme_surfaceContainerHigh_highContrast"
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,7 +17,7 @@
             android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/_chevron_left3" />
+            android:src="@drawable/_chevron_left2" />
 
         <EditText
             android:id="@+id/search_comment"
@@ -26,12 +27,13 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="1dp"
             android:layout_weight="9"
-            android:background="@drawable/shape3"
+            android:background="@drawable/shape2"
             android:drawableStart="@drawable/magnifyingglass4"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/md_theme_onSurfaceVariant_mediumContrast"
             android:gravity="center_vertical"
             android:padding="5dp"
-            android:textColor="@color/black"
+            android:textColor="@color/md_theme_primary"
             android:textSize="16sp" />
 
         <TextView
@@ -41,21 +43,22 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="搜索" />
+            android:text="搜索"
+            android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#EDEDED" />
+        android:layout_height="0.5dp"
+        android:background="@color/md_theme_outline" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="历史记录"
-        android:textColor="@color/black" />
+        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_recycler_view"
@@ -68,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="猜你想搜"
-        android:textColor="@color/black" />
+        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/suggested_recycler_view"
@@ -81,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="热点"
-        android:textColor="@color/black" />
+        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hot_topics_recycler_view"

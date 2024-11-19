@@ -23,7 +23,7 @@
             android:layout_marginStart="10dp"
             android:gravity="center"
             android:text="编辑资料"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -69,7 +69,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="名字"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textSize="16sp" />
 
                     <View
@@ -84,7 +84,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textColorHint="#ACA8A8"
                         android:textSize="16sp" />
 
@@ -143,7 +143,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="手机号"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textSize="16sp" />
 
                     <View
@@ -157,7 +157,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -215,7 +215,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="简介"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textSize="16sp" />
 
                     <View
@@ -230,7 +230,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textColorHint="#ACA8A8"
                         android:textSize="16sp" />
 
@@ -289,7 +289,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="性别"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textSize="16sp" />
 
                     <View
@@ -304,7 +304,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textColorHint="#ACA8A8"
                         android:textSize="16sp" />
 
@@ -364,7 +364,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="生日"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textSize="16sp" />
 
                     <View
@@ -379,7 +379,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textColorHint="#ACA8A8"
                         android:textSize="16sp" />
 
@@ -439,7 +439,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="职业"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textSize="16sp" />
 
                     <View
@@ -454,7 +454,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textColorHint="#ACA8A8"
                         android:textSize="16sp" />
 
@@ -513,7 +513,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="地区"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textSize="16sp" />
 
                     <View
@@ -528,7 +528,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textColorHint="#ACA8A8"
                         android:textSize="16sp" />
 
@@ -588,7 +588,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="学校"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textSize="16sp" />
 
                     <View
@@ -603,7 +603,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textColorHint="#ACA8A8"
                         android:textSize="16sp" />
 
@@ -663,7 +663,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="背景图"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:textSize="16sp" />
 
                     <View
@@ -730,7 +730,7 @@
                     android:background="@drawable/shape4"
                     android:gravity="center"
                     android:text="修改"
-                    android:textColor="@color/white"
+                    android:textColor="@android:color/white"
                     android:textSize="18sp" />
 
                 <View
