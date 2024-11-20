@@ -9,7 +9,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="该区域尚未开发"
-        android:textColor="@android:color/black"
+        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
         android:textSize="20sp" />
 
 </LinearLayout>

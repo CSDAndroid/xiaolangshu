@@ -15,7 +15,7 @@
             android:id="@+id/main_pager_navRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/md_theme_surfaceContainerHigh_highContrast"
+            android:background="@color/md_theme_surface"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -27,7 +27,7 @@
 
             <RadioButton
                 android:id="@+id/no1"
-                style="@style/RadioGroupButtonStyle" />
+                style="@style/RadioGroupButtonStyle1" />
 
             <RadioButton
                 android:id="@+id/main_pager_focus"
@@ -49,8 +49,7 @@
 
             <RadioButton
                 android:id="@+id/no2"
-                style="@style/RadioGroupButtonStyle"
-                android:padding="10dp" />
+                style="@style/RadioGroupButtonStyle1" />
 
             <RadioButton
                 android:id="@+id/main_pager_search"

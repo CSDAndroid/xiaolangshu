@@ -4,7 +4,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape2"
+        android:background="@drawable/shape"
         android:orientation="vertical">
 
         <ImageView
@@ -35,7 +35,7 @@
                 android:layout_gravity="center_vertical"
                 android:maxLength="6"
                 android:text="阿呆"
-                android:textColor="@color/md_theme_primary"
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                 android:textSize="10sp" />
 
             <View
@@ -57,7 +57,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 android:text="1.2万"
-                android:textColor="@color/md_theme_primary"
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                 android:textSize="10sp" />
 
         </LinearLayout>

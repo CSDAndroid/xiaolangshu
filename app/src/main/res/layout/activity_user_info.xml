@@ -2,20 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333232"
+    android:background="@color/md_theme_background"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/md_theme_surface">
 
         <ImageButton
             android:id="@+id/userInfo_back"
             android:layout_width="50dp"
             android:layout_height="60dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/_chevron_left4" />
+            android:src="@drawable/_chevron_left2" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,7 +24,7 @@
             android:layout_marginStart="10dp"
             android:gravity="center"
             android:text="编辑资料"
-            android:textColor="@android:color/white"
+            android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -31,7 +32,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:background="@color/md_theme_surface">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,7 +71,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="名字"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                         android:textSize="16sp" />
 
                     <View
@@ -84,8 +86,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="#ACA8A8"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
+                        android:textColorHint="@color/md_theme_outline"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -111,7 +113,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="12"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@color/md_theme_outline" />
 
                 <View
                     android:layout_width="0dp"
@@ -143,7 +145,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="手机号"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                         android:textSize="16sp" />
 
                     <View
@@ -157,7 +159,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -183,7 +185,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="12"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@color/md_theme_outline" />
 
                 <View
                     android:layout_width="0dp"
@@ -215,7 +217,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="简介"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                         android:textSize="16sp" />
 
                     <View
@@ -230,8 +232,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="#ACA8A8"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
+                        android:textColorHint="@color/md_theme_outline"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -257,7 +259,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="12"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@color/md_theme_outline" />
 
                 <View
                     android:layout_width="0dp"
@@ -289,7 +291,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="性别"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                         android:textSize="16sp" />
 
                     <View
@@ -304,8 +306,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="#ACA8A8"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
+                        android:textColorHint="@color/md_theme_outline"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -332,7 +334,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="12"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@color/md_theme_outline" />
 
                 <View
                     android:layout_width="0dp"
@@ -364,7 +366,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="生日"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                         android:textSize="16sp" />
 
                     <View
@@ -379,8 +381,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="#ACA8A8"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
+                        android:textColorHint="@color/md_theme_outline"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -407,7 +409,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="12"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@color/md_theme_outline" />
 
                 <View
                     android:layout_width="0dp"
@@ -439,7 +441,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="职业"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                         android:textSize="16sp" />
 
                     <View
@@ -454,8 +456,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="#ACA8A8"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
+                        android:textColorHint="@color/md_theme_outline"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -481,7 +483,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="12"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@color/md_theme_outline" />
 
                 <View
                     android:layout_width="0dp"
@@ -513,7 +515,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="地区"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                         android:textSize="16sp" />
 
                     <View
@@ -528,8 +530,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="#ACA8A8"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
+                        android:textColorHint="@color/md_theme_outline"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -556,7 +558,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="12"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@color/md_theme_outline" />
 
                 <View
                     android:layout_width="0dp"
@@ -588,7 +590,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="学校"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                         android:textSize="16sp" />
 
                     <View
@@ -603,8 +605,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:hint="未填"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="#ACA8A8"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
+                        android:textColorHint="@color/md_theme_outline"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -631,7 +633,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="12"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@color/md_theme_outline" />
 
                 <View
                     android:layout_width="0dp"
@@ -663,7 +665,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="背景图"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                         android:textSize="16sp" />
 
                     <View
@@ -702,7 +704,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="12"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@color/md_theme_outline" />
 
                 <View
                     android:layout_width="0dp"
@@ -730,7 +732,7 @@
                     android:background="@drawable/shape4"
                     android:gravity="center"
                     android:text="修改"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                     android:textSize="18sp" />
 
                 <View

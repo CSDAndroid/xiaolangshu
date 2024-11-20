@@ -16,7 +16,7 @@
         android:id="@+id/main_navRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_theme_surfaceContainerHigh_highContrast"
+        android:background="@color/md_theme_surface"
         android:gravity="center"
         android:orientation="horizontal">
 

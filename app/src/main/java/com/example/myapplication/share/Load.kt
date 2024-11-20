@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -27,7 +28,7 @@ import com.example.myapplication.viewModel.PictureInfoViewModelFactory
 
 class Load : AppCompatActivity() {
 
-    private lateinit var back: Button
+    private lateinit var back: ImageButton
     private lateinit var share: Button
     private lateinit var title: EditText
     private lateinit var tagView: EditText

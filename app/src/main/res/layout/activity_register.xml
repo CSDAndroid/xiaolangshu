@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_theme_background"
+    android:background="@color/md_theme_surface"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="手机号注册"
-        android:textColor="@color/md_theme_onBackground"
+        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
         android:textSize="28sp" />
 
     <LinearLayout
@@ -41,7 +41,7 @@
             android:hint="请输入昵称"
             android:maxLength="20"
             android:padding="10dp"
-            android:textColor="@color/md_theme_primary"
+            android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
             android:textColorHint="@color/md_theme_outline" />
 
         <EditText
@@ -57,7 +57,7 @@
             android:inputType="phone"
             android:maxLength="11"
             android:padding="10dp"
-            android:textColor="@color/md_theme_primary"
+            android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
             android:textColorHint="@color/md_theme_outline" />
 
         <EditText
@@ -73,7 +73,7 @@
             android:inputType="textPassword"
             android:maxLength="20"
             android:padding="10dp"
-            android:textColor="@color/md_theme_primary"
+            android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
             android:textColorHint="@color/md_theme_outline" />
 
         <EditText
@@ -89,7 +89,7 @@
             android:inputType="textPassword"
             android:maxLength="20"
             android:padding="10dp"
-            android:textColor="@color/md_theme_primary"
+            android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
             android:textColorHint="@color/md_theme_outline" />
 
         <LinearLayout
@@ -111,7 +111,7 @@
                 android:inputType="number"
                 android:maxLength="6"
                 android:padding="10dp"
-                android:textColor="@color/md_theme_primary"
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                 android:textColorHint="@color/md_theme_outline" />
 
             <Button
@@ -125,7 +125,7 @@
                 android:background="@drawable/shape2"
                 android:gravity="center"
                 android:text="获取验证码"
-                android:textColor="@color/md_theme_primary" />
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast" />
 
         </LinearLayout>
 
@@ -139,7 +139,7 @@
             android:background="@drawable/shape5"
             android:gravity="center"
             android:text="注册"
-            android:textColor="@color/md_theme_onPrimary"
+            android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
             android:textSize="18sp" />
 
     </LinearLayout>
