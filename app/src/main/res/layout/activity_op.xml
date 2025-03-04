@@ -24,7 +24,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="你    的    生    活    指   南"
-        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast" />
+        android:textColor="@color/md_theme_onSurface" />
 
     <View
         android:layout_width="match_parent"
@@ -40,8 +40,9 @@
         android:layout_marginEnd="60dp"
         android:background="@drawable/shape4"
         android:text="登录"
-        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
-        android:textSize="18sp" />
+        android:textColor="@color/md_theme_primary"
+        android:textSize="18sp"
+        android:elevation="2dp"/>
 
     <Button
         android:id="@+id/op_register"
@@ -52,9 +53,10 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="60dp"
-        android:background="@drawable/shape5"
+        android:background="@drawable/shape4"
         android:text="注册"
-        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
-        android:textSize="18sp" />
+        android:textColor="@color/md_theme_primary"
+        android:textSize="18sp"
+        android:elevation="2dp"/>
 
 </LinearLayout>

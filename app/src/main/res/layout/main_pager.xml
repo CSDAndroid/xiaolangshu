@@ -23,7 +23,7 @@
                 android:id="@+id/main_pager_navButton"
                 style="@style/RadioGroupButtonStyle"
                 android:background="@drawable/nav_left_background"
-                android:backgroundTint="@color/md_theme_onSurfaceVariant_mediumContrast" />
+                android:backgroundTint="@color/md_theme_onSurfaceVariant_highContrast" />
 
             <RadioButton
                 android:id="@+id/no1"
@@ -55,7 +55,7 @@
                 android:id="@+id/main_pager_search"
                 style="@style/RadioGroupButtonStyle"
                 android:background="@drawable/magnifyingglass_background"
-                android:backgroundTint="@color/md_theme_onSurfaceVariant_mediumContrast" />
+                android:backgroundTint="@color/md_theme_onSurfaceVariant_highContrast" />
 
         </RadioGroup>
 
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/md_theme_surfaceContainerHigh_mediumContrast"
+        android:background="@color/md_theme_surfaceContainerLow"
         app:menu="@menu/main_bottom_navigation" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

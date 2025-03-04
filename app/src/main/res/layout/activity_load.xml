@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_theme_surface"
     android:orientation="vertical">
 
     <LinearLayout
@@ -48,7 +47,7 @@
         android:layout_marginEnd="24dp"
         android:background="@android:color/transparent"
         android:hint="这一刻的想法..."
-        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
+        android:textColor="@color/md_theme_onSurfaceVariant"
         android:textColorHint="@color/md_theme_outline"
         android:textSize="16sp" />
 
@@ -69,7 +68,7 @@
         android:layout_marginEnd="24dp"
         android:background="@android:color/transparent"
         android:hint="##"
-        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
+        android:textColor="@color/md_theme_onSurfaceVariant"
         android:textColorHint="@color/md_theme_outline"
         android:textSize="14sp" />
 
@@ -96,7 +95,7 @@
                 android:background="@drawable/tag_background"
                 android:padding="8dp"
                 android:text="#动漫"
-                android:textColor="@color/md_theme_onSecondaryContainer"
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                 android:textSize="14sp" />
 
             <TextView
@@ -107,7 +106,7 @@
                 android:background="@drawable/tag_background"
                 android:padding="8dp"
                 android:text="#影视"
-                android:textColor="@color/md_theme_onSecondaryContainer"
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                 android:textSize="14sp" />
 
             <TextView
@@ -118,7 +117,7 @@
                 android:background="@drawable/tag_background"
                 android:padding="8dp"
                 android:text="#生活"
-                android:textColor="@color/md_theme_onSecondaryContainer"
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                 android:textSize="14sp" />
 
             <TextView
@@ -129,7 +128,7 @@
                 android:background="@drawable/tag_background"
                 android:padding="8dp"
                 android:text="#摄影"
-                android:textColor="@color/md_theme_onSecondaryContainer"
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                 android:textSize="14sp" />
 
             <TextView
@@ -140,7 +139,7 @@
                 android:background="@drawable/tag_background"
                 android:padding="8dp"
                 android:text="#cos"
-                android:textColor="@color/md_theme_onSecondaryContainer"
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                 android:textSize="14sp" />
 
             <TextView
@@ -151,7 +150,7 @@
                 android:background="@drawable/tag_background"
                 android:padding="8dp"
                 android:text="#ACG"
-                android:textColor="@color/md_theme_onSecondaryContainer"
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                 android:textSize="14sp" />
 
             <TextView
@@ -162,7 +161,7 @@
                 android:background="@drawable/tag_background"
                 android:padding="8dp"
                 android:text="#绘画"
-                android:textColor="@color/md_theme_onSecondaryContainer"
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                 android:textSize="14sp" />
 
             <TextView
@@ -173,7 +172,7 @@
                 android:background="@drawable/tag_background"
                 android:padding="8dp"
                 android:text="#头像"
-                android:textColor="@color/md_theme_onSecondaryContainer"
+                android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
                 android:textSize="14sp" />
 
         </LinearLayout>

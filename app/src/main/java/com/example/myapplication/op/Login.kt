@@ -37,8 +37,10 @@ class Login : AppCompatActivity(), View.OnClickListener {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.logBack.setOnClickListener {
-            finish()
+        setSupportActionBar(binding.logToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.logToolbar.setNavigationOnClickListener {
+           finish()
         }
 
         binding.login.setOnClickListener(this)

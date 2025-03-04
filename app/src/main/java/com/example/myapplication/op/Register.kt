@@ -48,7 +48,9 @@ class Register : AppCompatActivity(), View.OnClickListener {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.resBack.setOnClickListener {
+        setSupportActionBar(binding.resToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.resToolbar.setNavigationOnClickListener {
             finish()
         }
 

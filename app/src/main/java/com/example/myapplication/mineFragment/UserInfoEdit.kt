@@ -47,7 +47,9 @@ class UserInfoEdit : AppCompatActivity() {
     }
 
     private fun back() {
-        binding.userInfoBack.setOnClickListener {
+        setSupportActionBar(binding.userInfoToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.userInfoToolbar.setNavigationOnClickListener {
             finish()
         }
     }

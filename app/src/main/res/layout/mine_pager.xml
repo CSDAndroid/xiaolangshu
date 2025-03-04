@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mine_swipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/md_theme_background">
+    android:layout_height="match_parent">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/layout_mine"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/md_theme_surface">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,8 +24,7 @@
                 <ImageView
                     android:id="@+id/mine_backgroundImage"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#20FFFFFF" />
+                    android:layout_height="match_parent" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -38,8 +35,7 @@
                         android:id="@+id/mine_navButton"
                         android:layout_width="50dp"
                         android:layout_height="60dp"
-                        android:background="@drawable/nav_left_background1"
-                        android:backgroundTint="@android:color/white"/>
+                        android:background="@drawable/nav_left_background1" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -176,15 +172,13 @@
                             android:background="@android:color/transparent"
                             android:orientation="horizontal">
 
-                            <Button
+                            <ImageButton
                                 android:id="@+id/mine_edit_userInfo"
-                                android:layout_width="wrap_content"
+                                android:layout_width="100dp"
                                 android:layout_height="35dp"
                                 android:layout_gravity="center_horizontal"
                                 android:background="@drawable/shape6"
-                                android:text="编辑资料"
-                                android:textColor="#C8CBCC"
-                                android:textSize="12sp"
+                                android:src="@drawable/edit"
                                 android:padding="2dp"/>
 
                             <ImageButton
@@ -268,8 +262,7 @@
                         android:id="@+id/mine_viewPager"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@color/md_theme_background" />
+                        android:layout_weight="1" />
 
                 </LinearLayout>
 
@@ -282,7 +275,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@color/md_theme_surfaceContainerHigh_mediumContrast"
+            android:background="@color/md_theme_surfaceContainerLow"
             app:menu="@menu/main_bottom_navigation" />
 
     </androidx.drawerlayout.widget.DrawerLayout>

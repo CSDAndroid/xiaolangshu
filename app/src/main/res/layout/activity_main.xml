@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/md_theme_surface" />
+        android:background="@color/md_theme_background" />
 
     <RadioGroup
         android:id="@+id/main_navRadioGroup"
@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:background="@color/md_theme_surface"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:elevation="2dp">
 
         <RadioButton
             android:id="@+id/main"
