@@ -2,24 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_theme_background"
     android:orientation="vertical">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/main_viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/md_theme_background" />
+        android:layout_weight="1" />
 
     <RadioGroup
         android:id="@+id/main_navRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_theme_surface"
+        android:background="@color/md_theme_secondaryContainer"
+        android:elevation="2dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:elevation="2dp">
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/main"

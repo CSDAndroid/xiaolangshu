@@ -8,8 +8,7 @@
     <ImageView
         android:id="@+id/PreVideo_item_img"
         android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/ic_launcher_background" />
+        android:layout_height="200dp" />
 
     <TextView
         android:id="@+id/PreVideo_item_description"
@@ -19,7 +18,7 @@
         android:layout_marginRight="8dp"
         android:maxLines="2"
         android:text="你的小红书封斋"
-        android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast"
+        android:textColor="@color/md_theme_onSurfaceVariant"
         android:textSize="16sp" />
 
     <LinearLayout

@@ -30,7 +30,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="4"
                 android:background="@drawable/shape2"
-                android:backgroundTint="@color/md_theme_outline"
+                android:backgroundTint="#252328"
                 android:drawableStart="@drawable/comment_write1" />
 
             <LinearLayout

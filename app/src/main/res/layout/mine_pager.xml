@@ -213,7 +213,7 @@
                         android:id="@+id/mine_navRadioGroup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/md_theme_surface"
+                        android:background="@color/md_theme_surfaceContainerLow"
                         android:gravity="center"
                         android:orientation="horizontal">
 
