@@ -14,7 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.adapter.VideoAdapter
 import com.example.myapplication.data.VideoInfo
 import com.example.myapplication.data.pictureData.Picture1
-import com.example.myapplication.database.UserInfoDatabase
+import com.example.myapplication.database.AccountDatabase
 import com.example.myapplication.databinding.ActivityVideoBinding
 import com.example.myapplication.lister.OnBackClickListener
 import com.example.myapplication.lister.OnCollectionLister
@@ -48,8 +48,8 @@ class Video : AppCompatActivity(), OnBackClickListener, OnLikeLister, OnCollecti
         VideoAdapter(this, this, this, videoPlayList, phone)
     }
 
-    private val database: UserInfoDatabase by lazy {
-        UserInfoDatabase.getDatabase(this)
+    private val database: AccountDatabase by lazy {
+        AccountDatabase.getDatabase(this)
     }
 
     private val videoInfoViewModel: VideoInfoViewModel by lazy {

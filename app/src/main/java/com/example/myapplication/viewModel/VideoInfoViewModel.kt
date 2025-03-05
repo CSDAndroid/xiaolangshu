@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.VideoInfo
-import com.example.myapplication.database.UserInfoDatabase
+import com.example.myapplication.database.AccountDatabase
 import com.example.myapplication.http.HttpInterface
 import com.example.myapplication.http.HttpUtil
 import com.example.myapplication.util.DealDataInfo.dealVideoInfo
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @SuppressLint("StaticFieldLeak")
-class VideoInfoViewModel(private val context: Context, private val database: UserInfoDatabase) :
+class VideoInfoViewModel(private val context: Context, private val database: AccountDatabase) :
     ViewModel() {
 
     private val address = "https://api.bilibili.com/"
@@ -103,7 +103,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
     fun getVideoLikeList(phone: String) {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
-                database.userInfoDao().getUserVideoLikeListByPhone(phone)
+                database.accountOtherDao().getLikeList(phone)
             }
 
             if (response != null) {
@@ -117,7 +117,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
     fun setTheVideoToLike(videoInfo: VideoInfo, phone: String) {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
-                database.userInfoDao().getUserVideoLikeListByPhone(phone)
+                database.accountOtherDao().getLikeList(phone)
             }
 
             if (response != null) {
@@ -133,7 +133,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
                 val updatedVideoLikeListJson = Gson().toJson(videoLikeList)
 
                 withContext(Dispatchers.IO) {
-                    database.userInfoDao().updateUserVideoLikeList(phone, updatedVideoLikeListJson)
+                    database.accountOtherDao().updateLikeList(phone, updatedVideoLikeListJson)
                     getVideoLikeList(phone)
                 }
             } else {
@@ -141,7 +141,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
                 val updatedVideoLikeListJson = Gson().toJson(videoLikeList)
 
                 withContext(Dispatchers.IO) {
-                    database.userInfoDao().updateUserVideoLikeList(phone, updatedVideoLikeListJson)
+                    database.accountOtherDao().updateLikeList(phone, updatedVideoLikeListJson)
                     getVideoLikeList(phone)
                 }
             }
@@ -151,7 +151,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
     fun getVideoCollectionList(phone: String) {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
-                database.userInfoDao().getUserVideoCollectionListByPhone(phone)
+                database.accountOtherDao().getCollectionList(phone)
             }
 
             if (response != null) {
@@ -165,7 +165,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
     fun setTheVideoToCollection(videoInfo: VideoInfo,phone: String) {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
-                database.userInfoDao().getUserVideoCollectionListByPhone(phone)
+                database.accountOtherDao().getCollectionList(phone)
             }
 
             if (response != null) {
@@ -181,7 +181,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
                 val updatedVideoCollectionList = Gson().toJson(videoCollectionList)
 
                 withContext(Dispatchers.IO) {
-                    database.userInfoDao().updateUserVideoCollectionList(phone,updatedVideoCollectionList)
+                    database.accountOtherDao().updateCollectionList(phone,updatedVideoCollectionList)
                     getVideoCollectionList(phone)
                 }
             } else {
@@ -189,7 +189,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
                 val updatedVideoCollectionList = Gson().toJson(videoCollectionList)
 
                 withContext(Dispatchers.IO) {
-                    database.userInfoDao().updateUserVideoCollectionList(phone,updatedVideoCollectionList)
+                    database.accountOtherDao().updateCollectionList(phone,updatedVideoCollectionList)
                 }
             }
         }
@@ -198,7 +198,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
     fun getVideoWorkList(phone: String) {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
-                database.userInfoDao().getUserVideoWorkListByPhone(phone)
+                database.accountOtherDao().getWorkList(phone)
             }
 
             if (response != null) {
@@ -212,7 +212,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
     fun setTheVideoToWork(videoInfo: VideoInfo,phone: String) {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
-                database.userInfoDao().getUserVideoWorkListByPhone(phone)
+                database.accountOtherDao().getWorkList(phone)
             }
 
             if (response != null) {
@@ -228,7 +228,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
                 val updatedVideoWorkList = Gson().toJson(videoCollectionList)
 
                 withContext(Dispatchers.IO) {
-                    database.userInfoDao().updateUserVideoWorkList(phone,updatedVideoWorkList)
+                    database.accountOtherDao().updateWorkList(phone,updatedVideoWorkList)
                     getVideoWorkList(phone)
                 }
             }  else {
@@ -236,7 +236,7 @@ class VideoInfoViewModel(private val context: Context, private val database: Use
                 val updatedVideoWorkList = Gson().toJson(videoWorkList)
 
                 withContext(Dispatchers.IO) {
-                    database.userInfoDao().updateUserVideoWorkList(phone,updatedVideoWorkList)
+                    database.accountOtherDao().updateWorkList(phone,updatedVideoWorkList)
                 }
             }
         }

@@ -6,8 +6,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.database.UserInfo
-import com.example.myapplication.database.UserInfoDatabase
+import com.example.myapplication.database.Account
+import com.example.myapplication.database.AccountDatabase
 import com.example.myapplication.http.HttpInterface
 import com.example.myapplication.http.HttpUtil
 import com.example.myapplication.util.DealDataInfo.dealUserInfo
@@ -21,10 +21,10 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
-class UserInfoViewModel(private val database: UserInfoDatabase) : ViewModel() {
+class UserInfoViewModel(private val database: AccountDatabase) : ViewModel() {
 
-    private val _usersLiveData = MutableLiveData<UserInfo?>()
-    val user: MutableLiveData<UserInfo?> get() = _usersLiveData
+    private val _usersLiveData = MutableLiveData<Account?>()
+    val user: MutableLiveData<Account?> get() = _usersLiveData
     private val address = "http://8.138.41.189:8085/"
     private val service = HttpUtil.sendHttp(address, HttpInterface::class.java)
 
@@ -33,7 +33,7 @@ class UserInfoViewModel(private val database: UserInfoDatabase) : ViewModel() {
         viewModelScope.launch {
             try {
                 val userInfo = withContext(Dispatchers.IO) {
-                    database.userInfoDao().getUserByPhone(phone)
+                    database.accountDao().getAccount(phone)
                 }
                 _usersLiveData.postValue(userInfo)
             } catch (e: Exception) {
@@ -57,7 +57,7 @@ class UserInfoViewModel(private val database: UserInfoDatabase) : ViewModel() {
                         val userTemInfo = responseData.data
                         val userInfo = dealUserInfo(userTemInfo)
                         _usersLiveData.postValue(userInfo)
-                        database.userInfoDao().updateUser(userInfo)
+                        database.accountDao().update(userInfo)
                     }
                 } else {
                     //不成功响应处理
@@ -130,8 +130,8 @@ class UserInfoViewModel(private val database: UserInfoDatabase) : ViewModel() {
         viewModelScope.launch {
             try {
                 when (selectedTag) {
-                    "avatar" -> database.userInfoDao().updateUserAvatar(phone, imageUrl)
-                    "backgroundImage" -> database.userInfoDao().updateUserBackground(phone, imageUrl)
+                    "avatar" -> database.accountDao().updateAvatar(phone, imageUrl)
+                    "backgroundImage" -> database.accountDao().updateBackground(phone, imageUrl)
                 }
             } catch (e: Exception) {
                 Log.e("uploadImageToRoom", "room添加图片错误---${e.message}", e)
@@ -154,10 +154,10 @@ class UserInfoViewModel(private val database: UserInfoDatabase) : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val avatar = database.userInfoDao().getUserAvatarByPhone(phone)
-                val backgroundImage = database.userInfoDao().getUserBackgroundByPhone(phone)
+                val avatar = database.accountDao().getAvatar(phone)
+                val backgroundImage = database.accountDao().getBackground(phone)
 
-                database.userInfoDao().updateUserByPhone(
+                database.accountDao().updateAccountByPhone(
                     introduction, birthday, sex, nickname, career, region, school, phone
                 )
 

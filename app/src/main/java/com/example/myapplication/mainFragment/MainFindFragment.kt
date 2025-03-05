@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.adapter.PreVideoViewAdapter
 import com.example.myapplication.data.VideoInfo
 import com.example.myapplication.data.pictureData.Picture1
-import com.example.myapplication.database.UserInfoDatabase
+import com.example.myapplication.database.AccountDatabase
 import com.example.myapplication.databinding.MainFindPagerBinding
 import com.example.myapplication.lister.OnLikeLister
 import com.example.myapplication.util.SpaceItem
@@ -47,7 +47,7 @@ class MainFindFragment : Fragment(), OnLikeLister {
     }
 
     private val videoInfoViewModel: VideoInfoViewModel by lazy {
-        val database = UserInfoDatabase.getDatabase(requireActivity())
+        val database = AccountDatabase.getDatabase(requireActivity())
         ViewModelProvider(
             requireActivity(),
             VideoInfoViewModelFactory(requireActivity(), database)

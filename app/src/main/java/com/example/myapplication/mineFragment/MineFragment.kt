@@ -19,8 +19,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.adapter.MAdapter
-import com.example.myapplication.database.UserInfo
-import com.example.myapplication.database.UserInfoDatabase
+import com.example.myapplication.database.Account
+import com.example.myapplication.database.AccountDatabase
 import com.example.myapplication.databinding.MinePagerBinding
 import com.example.myapplication.op.OP
 import com.example.myapplication.share.Load
@@ -47,7 +47,7 @@ class MineFragment : Fragment() {
     }
 
     private val userViewModel: UserInfoViewModel by lazy {
-        val database = UserInfoDatabase.getDatabase(requireActivity())
+        val database = AccountDatabase.getDatabase(requireActivity())
         ViewModelProvider(
             requireActivity(),
             UserInfoViewModelFactory(database)
@@ -135,25 +135,25 @@ class MineFragment : Fragment() {
         binding.mineViewPager.currentItem = currentItem
     }
 
-    private fun setUserInfoToView(userInfo: UserInfo) {
-        userInfo.backgroundImage?.let {
+    private fun setUserInfoToView(account: Account) {
+        account.background?.let {
             Glide.with(requireContext()).load(it).into(binding.mineBackgroundImage)
         }
-        userInfo.avatar?.let {
+        account.avatar?.let {
             Glide.with(requireContext()).load(it).into(binding.mineAvatar)
         }
-        binding.mineIntroduction.text = userInfo.introduction ?: ""
-        binding.mineNickname.text = userInfo.nickname
+        binding.mineIntroduction.text = account.introduction ?: ""
+        binding.mineNickname.text = account.nickname
 
-        setupImagePicker(userInfo)
+        setupImagePicker(account)
     }
 
-    private fun setupImagePicker(userInfo: UserInfo) {
+    private fun setupImagePicker(account: Account) {
         ImageDealHelper.initImagePicker(
             this,
             onImageSelected = { _, _ -> },
             onImageCropped = { uri, selectedTag ->
-                handleImageCrop(uri, selectedTag, userInfo)
+                handleImageCrop(uri, selectedTag, account)
             }
         )
 
@@ -166,7 +166,7 @@ class MineFragment : Fragment() {
         }
     }
 
-    private fun handleImageCrop(uri: Uri, selectedTag: String, userInfo: UserInfo) {
+    private fun handleImageCrop(uri: Uri, selectedTag: String, account: Account) {
         when (selectedTag) {
             "avatar" -> binding.mineAvatar.setImageURI(uri)
             "backgroundImage" -> binding.mineBackgroundImage.setImageURI(uri)
@@ -180,14 +180,14 @@ class MineFragment : Fragment() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             userViewModel.updateUserInfoToRoom(
-                userInfo.introduction,
-                userInfo.birthday,
-                userInfo.sex,
-                userInfo.nickname,
-                userInfo.career,
-                userInfo.phone,
-                userInfo.region,
-                userInfo.school,
+                account.introduction,
+                account.birthday,
+                account.sex,
+                account.nickname,
+                account.career,
+                account.phone,
+                account.region,
+                account.school,
                 null
             )
         }, 1000)

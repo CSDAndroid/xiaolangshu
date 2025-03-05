@@ -2,9 +2,9 @@ package com.example.myapplication.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.database.UserInfoDatabase
+import com.example.myapplication.database.AccountDatabase
 
-class UserInfoViewModelFactory(private val database: UserInfoDatabase) : ViewModelProvider.Factory {
+class UserInfoViewModelFactory(private val database: AccountDatabase) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(UserInfoViewModel::class.java)) {

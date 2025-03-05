@@ -20,7 +20,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
-import com.example.myapplication.database.UserInfoDatabase
+import com.example.myapplication.database.AccountDatabase
 import com.example.myapplication.util.DialogUtil
 import com.example.myapplication.util.ImageDealHelper
 import com.example.myapplication.viewModel.PictureInfoViewModel
@@ -46,7 +46,7 @@ class Load : AppCompatActivity() {
     private lateinit var linearLayout2: LinearLayout
     private lateinit var uri: Uri
     private lateinit var description: String
-    private lateinit var database: UserInfoDatabase
+    private lateinit var database: AccountDatabase
     private lateinit var pictureInfoViewModel: PictureInfoViewModel
     private lateinit var registerForResult: ActivityResultLauncher<Intent>
     private lateinit var phone: String
@@ -89,7 +89,7 @@ class Load : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        database = UserInfoDatabase.getDatabase(this)
+        database = AccountDatabase.getDatabase(this)
 
         pictureInfoViewModel = ViewModelProvider(
             this,

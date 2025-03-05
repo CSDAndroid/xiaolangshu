@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.pictureData.Picture
 import com.example.myapplication.data.pictureData.Picture1
-import com.example.myapplication.database.UserInfoDatabase
+import com.example.myapplication.database.AccountDatabase
 import com.example.myapplication.http.HttpInterface
 import com.example.myapplication.http.HttpUtil
 import com.example.myapplication.util.ImageDealHelper
@@ -24,7 +24,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 @SuppressLint("StaticFieldLeak")
-class PictureInfoViewModel(private val context: Context, private val database: UserInfoDatabase) :
+class PictureInfoViewModel(private val context: Context, private val database: AccountDatabase) :
     ViewModel() {
 
     private val address = "http://8.138.41.189:8085/"
@@ -106,7 +106,7 @@ class PictureInfoViewModel(private val context: Context, private val database: U
                 //成功响应处理
                 if (response.isSuccessful) {
                     response.body()?.let { responseData ->
-                        val userInfo = database.userInfoDao().getUserByPhone(phone)
+                        val userInfo = database.accountDao().getAccount(phone)
                         if (userInfo != null) {
                             val picture = Picture(
                                 userInfo.nickname,
@@ -222,7 +222,7 @@ class PictureInfoViewModel(private val context: Context, private val database: U
 
                         val pictureListString = Gson().toJson(pictureLikeList)
                         withContext(Dispatchers.IO) {
-                            database.userInfoDao().setLikesList(phone, pictureListString)
+                            database.accountOtherDao().updateLikeList(phone, pictureListString)
                         }
                     }
                 } else {
@@ -276,7 +276,7 @@ class PictureInfoViewModel(private val context: Context, private val database: U
 
                         val pictureListString = Gson().toJson(pictureCollectionList)
                         withContext(Dispatchers.IO) {
-                            database.userInfoDao().setCollectionsList(phone, pictureListString)
+                            database.accountOtherDao().updateCollectionList(phone, pictureListString)
                         }
                     }
                 } else {
@@ -330,7 +330,7 @@ class PictureInfoViewModel(private val context: Context, private val database: U
                         _focusPhoneListLiveData.postValue(focusPhoneList)
                         val focusListString = Gson().toJson(focusList)
                         withContext(Dispatchers.IO) {
-                            database.userInfoDao().setFocusList(phone, focusListString)
+                            database.accountOtherDao().updateFocusList(phone, focusListString)
                         }
                     }
                 } else {

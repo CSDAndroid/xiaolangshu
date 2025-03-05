@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.myapplication.database.UserInfo
-import com.example.myapplication.database.UserInfoDatabase
+import com.example.myapplication.database.Account
+import com.example.myapplication.database.AccountDatabase
 import com.example.myapplication.databinding.ActivityUserInfoBinding
 import com.example.myapplication.util.DialogUtil
 import com.example.myapplication.util.ImageDealHelper
@@ -30,7 +30,7 @@ class UserInfoEdit : AppCompatActivity() {
     }
 
     private val userViewModel: UserInfoViewModel by lazy {
-        val database = UserInfoDatabase.getDatabase(this)
+        val database = AccountDatabase.getDatabase(this)
         ViewModelProvider(
             this,
             UserInfoViewModelFactory(database)
@@ -62,29 +62,29 @@ class UserInfoEdit : AppCompatActivity() {
         }.getUserInfoFromRoom(phone)
     }
 
-    private fun setUserInfoToView(userInfo: UserInfo) {
-        binding.userInfoNickname.setText(userInfo.nickname)
+    private fun setUserInfoToView(account: Account) {
+        binding.userInfoNickname.setText(account.nickname)
         binding.userInfoPhone.text = phone
 
-        userInfo.backgroundImage?.let {
+        account.background?.let {
             Glide.with(this).load(it).into(binding.userInfoBackgroundImage)
         }
-        userInfo.avatar?.let {
+        account.avatar?.let {
             Glide.with(this).load(it).into(binding.userInfoAvatar)
         }
-        userInfo.introduction?.let {
+        account.introduction?.let {
             binding.userInfoIntroduction.setText(it)
         }
-        userInfo.birthday?.let {
+        account.birthday?.let {
             binding.userInfoBirthday.setText(it)
         }
-        userInfo.career?.let {
+        account.career?.let {
             binding.userInfoCareer.setText(it)
         }
-        userInfo.region?.let {
+        account.region?.let {
             binding.userInfoRegion.setText(it)
         }
-        userInfo.school?.let {
+        account.school?.let {
             binding.userInfoSchool.setText(it)
         }
         binding.userInfoAvatar.setOnClickListener {
@@ -94,7 +94,7 @@ class UserInfoEdit : AppCompatActivity() {
         binding.userInfoBackgroundImage.setOnClickListener {
             ImageDealHelper.openGallery("backgroundImage")
         }
-        userInfo.sex?.let {
+        account.sex?.let {
             when (it) {
                 "male" -> binding.userInfoSex.setText("男")
                 "female" -> binding.userInfoSex.setText("女")

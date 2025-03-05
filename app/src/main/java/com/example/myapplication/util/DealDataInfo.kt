@@ -4,11 +4,10 @@ import com.example.myapplication.data.VideoInfo
 import com.example.myapplication.data.randomVideoData.VideoResponse
 import com.example.myapplication.data.searchVideoData.VideoBySearch
 import com.example.myapplication.data.userData.UserResponseData
-import com.example.myapplication.database.UserInfo
+import com.example.myapplication.database.Account
 
 object DealDataInfo {
-    fun dealUserInfo(user: UserResponseData): UserInfo {
-        val id = user.id
+    fun dealUserInfo(user: UserResponseData): Account {
         val avatar = user.avatar
         val nickname = user.nickname
         val phone = user.phone
@@ -20,11 +19,8 @@ object DealDataInfo {
         val region = user.region
         val school = user.school
         val backgroundImage = user.backgroundImage
-        return UserInfo(
-            id, avatar, nickname, phone, password, introduction, sex, birthday, career,
-            region, school, backgroundImage, null, null, null,
-            null, null, null, null, null,null,
-            null,null)
+        return Account(phone, avatar, nickname, password, introduction, sex, birthday, career,
+            region, school, backgroundImage)
     }
 
     fun <T> dealVideoInfo(videos: List<T>): List<VideoInfo> {
