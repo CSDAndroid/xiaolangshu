@@ -20,7 +20,7 @@ import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.mainFragment.MainFragment
 import com.example.myapplication.messageFragment.MessageFragment
 import com.example.myapplication.mineFragment.MineFragment
-import com.example.myapplication.op.OP
+import com.example.myapplication.account.op.OP
 import com.example.myapplication.pictureFragment.PictureFragment
 import com.example.myapplication.viewModel.PictureInfoViewModel
 import com.example.myapplication.viewModel.PictureInfoViewModelFactory

@@ -1,4 +1,4 @@
-package com.example.myapplication.op
+package com.example.myapplication.account.op
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.MainActivity
-import com.example.myapplication.data.requestData.LoginRequest
+import com.example.myapplication.account.bean.LoginRequest
 import com.example.myapplication.databinding.ActivityLoginBinding
 import com.example.myapplication.http.HttpInterface
 import com.example.myapplication.http.HttpUtil

@@ -43,13 +43,13 @@
             android:name=".mineFragment.UserInfoEdit"
             android:exported="false" />
         <activity
-            android:name=".op.OP"
+            android:name=".account.op.OP"
             android:exported="false" />
         <activity
-            android:name=".op.Login"
+            android:name=".account.op.Login"
             android:exported="false" />
         <activity
-            android:name=".op.Register"
+            android:name=".account.op.Register"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -14,7 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.R
 import com.example.myapplication.adapter.MAdapter
 import com.example.myapplication.databinding.MainPagerBinding
-import com.example.myapplication.op.OP
+import com.example.myapplication.account.op.OP
 import com.example.myapplication.search.Search
 
 class MainFragment : Fragment() {

@@ -15,7 +15,7 @@ data class Account(
     val avatar: String?,
 
     @ColumnInfo(name = "nickname")
-    val nickname: String,
+    val nickname: String?,
 
     @ColumnInfo(name = "password")
     val password: String,

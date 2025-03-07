@@ -3,7 +3,7 @@ package com.example.myapplication.http
 import com.example.myapplication.data.pictureData.Picture
 import com.example.myapplication.data.pictureData.Picture1
 import com.example.myapplication.data.randomVideoData.Data
-import com.example.myapplication.data.requestData.LoginRequest
+import com.example.myapplication.account.bean.LoginRequest
 import com.example.myapplication.data.responseData.ApiResponse2
 import com.example.myapplication.data.responseData.MyResponse1
 import com.example.myapplication.data.searchVideoData.SearchData

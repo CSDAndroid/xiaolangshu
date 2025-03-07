@@ -1,4 +1,4 @@
-package com.example.myapplication.data.requestData
+package com.example.myapplication.account.bean
 
 data class LoginRequest(
     val phone: String,
