@@ -15,7 +15,7 @@ import com.example.myapplication.adapter.PrePictureViewAdapter
 import com.example.myapplication.data.Item
 import com.example.myapplication.data.VideoInfo
 import com.example.myapplication.data.pictureData.Picture1
-import com.example.myapplication.database.AccountDatabase
+import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.databinding.MineCollectionPagerBinding
 import com.example.myapplication.lister.OnLikeLister
 import com.example.myapplication.util.SpaceItem
@@ -48,8 +48,8 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
         requireContext().getSharedPreferences("IsLogin", Context.MODE_PRIVATE)
     }
 
-    private val database: AccountDatabase by lazy {
-        AccountDatabase.getDatabase(requireActivity())
+    private val database: AppDatabase by lazy {
+        AppDatabase.getDatabase(requireActivity())
     }
 
     private val pictureInfoViewModel: PictureInfoViewModel by lazy {

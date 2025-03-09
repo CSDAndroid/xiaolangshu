@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.adapter.PreVideoViewAdapter
 import com.example.myapplication.data.VideoInfo
 import com.example.myapplication.data.pictureData.Picture1
-import com.example.myapplication.database.AccountDatabase
+import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.databinding.ActivityAfterSearchBinding
 import com.example.myapplication.lister.OnLikeLister
 import com.example.myapplication.util.SpaceItem
@@ -43,7 +43,7 @@ class AfterSearch : AppCompatActivity() ,OnLikeLister {
     }
 
     private val videoInfoViewModel: VideoInfoViewModel by lazy {
-        val database = AccountDatabase.getDatabase(this)
+        val database = AppDatabase.getDatabase(this)
         ViewModelProvider(
             this,
             VideoInfoViewModelFactory(this,database)

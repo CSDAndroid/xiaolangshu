@@ -46,10 +46,10 @@
             android:name=".account.op.OP"
             android:exported="false" />
         <activity
-            android:name=".account.op.Login"
+            android:name=".account.op.login.Login"
             android:exported="false" />
         <activity
-            android:name=".account.op.Register"
+            android:name=".account.op.register.Register"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

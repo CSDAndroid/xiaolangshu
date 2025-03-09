@@ -6,10 +6,10 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.database.Account
-import com.example.myapplication.database.AccountDatabase
+import com.example.myapplication.storage.db.entity.Account
+import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.http.HttpInterface
-import com.example.myapplication.http.HttpUtil
+import com.example.myapplication.http.HttpService
 import com.example.myapplication.util.DealDataInfo.dealUserInfo
 import com.example.myapplication.util.ImageDealHelper
 import com.example.myapplication.util.ImageDealHelper.getMimeType
@@ -21,12 +21,12 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
-class UserInfoViewModel(private val database: AccountDatabase) : ViewModel() {
+class UserInfoViewModel(private val database: AppDatabase) : ViewModel() {
 
     private val _usersLiveData = MutableLiveData<Account?>()
     val user: MutableLiveData<Account?> get() = _usersLiveData
     private val address = "http://8.138.41.189:8085/"
-    private val service = HttpUtil.sendHttp(address, HttpInterface::class.java)
+    private val service = HttpService.sendHttp(address, HttpInterface::class.java)
 
     //从room获取用户信息
     fun getUserInfoFromRoom(phone: String) {

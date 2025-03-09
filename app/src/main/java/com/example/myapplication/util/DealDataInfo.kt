@@ -4,7 +4,7 @@ import com.example.myapplication.data.VideoInfo
 import com.example.myapplication.data.randomVideoData.VideoResponse
 import com.example.myapplication.data.searchVideoData.VideoBySearch
 import com.example.myapplication.data.userData.UserResponseData
-import com.example.myapplication.database.Account
+import com.example.myapplication.storage.db.entity.Account
 
 object DealDataInfo {
     fun dealUserInfo(user: UserResponseData): Account {

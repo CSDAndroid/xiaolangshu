@@ -10,9 +10,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.pictureData.Picture
 import com.example.myapplication.data.pictureData.Picture1
-import com.example.myapplication.database.AccountDatabase
+import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.http.HttpInterface
-import com.example.myapplication.http.HttpUtil
+import com.example.myapplication.http.HttpService
 import com.example.myapplication.util.ImageDealHelper
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -24,11 +24,11 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 @SuppressLint("StaticFieldLeak")
-class PictureInfoViewModel(private val context: Context, private val database: AccountDatabase) :
+class PictureInfoViewModel(private val context: Context, private val database: AppDatabase) :
     ViewModel() {
 
     private val address = "http://8.138.41.189:8085/"
-    private val service = HttpUtil.sendHttp(address, HttpInterface::class.java)
+    private val service = HttpService.sendHttp(address, HttpInterface::class.java)
 
     private val _pictureListLiveData = MutableLiveData<List<Picture1>?>()
     val pictureList: MutableLiveData<List<Picture1>?> get() = _pictureListLiveData

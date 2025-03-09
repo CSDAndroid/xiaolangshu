@@ -8,9 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.VideoInfo
-import com.example.myapplication.database.AccountDatabase
+import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.http.HttpInterface
-import com.example.myapplication.http.HttpUtil
+import com.example.myapplication.http.HttpService
 import com.example.myapplication.util.DealDataInfo.dealVideoInfo
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -19,11 +19,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @SuppressLint("StaticFieldLeak")
-class VideoInfoViewModel(private val context: Context, private val database: AccountDatabase) :
+class VideoInfoViewModel(private val context: Context, private val database: AppDatabase) :
     ViewModel() {
 
     private val address = "https://api.bilibili.com/"
-    private val service = HttpUtil.sendHttp(address, HttpInterface::class.java)
+    private val service = HttpService.sendHttp(address, HttpInterface::class.java)
 
     private val _videoListLiveData = MutableLiveData<List<VideoInfo>>()
     val videoList: MutableLiveData<List<VideoInfo>> get() = _videoListLiveData

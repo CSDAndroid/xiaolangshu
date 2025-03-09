@@ -13,7 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.adapter.PictureAdapter
 import com.example.myapplication.data.VideoInfo
 import com.example.myapplication.data.pictureData.Picture1
-import com.example.myapplication.database.AccountDatabase
+import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.databinding.ActivityPictureBinding
 import com.example.myapplication.lister.ImageDownLoadCallBack
 import com.example.myapplication.lister.OnBackClickListener
@@ -40,8 +40,8 @@ class PictureLoad : AppCompatActivity(), OnBackClickListener, OnLikeLister, OnCo
         getSharedPreferences("IsLogin", Context.MODE_PRIVATE)
     }
 
-    private val database: AccountDatabase by lazy {
-        AccountDatabase.getDatabase(this)
+    private val database: AppDatabase by lazy {
+        AppDatabase.getDatabase(this)
     }
 
     private val mAdapter: PictureAdapter by lazy {

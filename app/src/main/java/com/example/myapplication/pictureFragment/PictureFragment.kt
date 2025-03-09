@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.adapter.PrePictureViewAdapter
 import com.example.myapplication.data.VideoInfo
 import com.example.myapplication.data.pictureData.Picture1
-import com.example.myapplication.database.AccountDatabase
+import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.databinding.PicturePagerBinding
 import com.example.myapplication.lister.OnLikeLister
 import com.example.myapplication.search.Search
@@ -45,7 +45,7 @@ class PictureFragment : Fragment(), OnLikeLister {
     }
 
     private val pictureInfoViewModel: PictureInfoViewModel by lazy {
-        val database = AccountDatabase.getDatabase(requireActivity())
+        val database = AppDatabase.getDatabase(requireActivity())
         ViewModelProvider(
             requireActivity(),
             PictureInfoViewModelFactory(requireActivity(), database)

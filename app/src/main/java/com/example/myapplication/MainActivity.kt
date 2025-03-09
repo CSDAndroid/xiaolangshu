@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.adapter.MAdapter
-import com.example.myapplication.database.AccountDatabase
+import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.mainFragment.MainFragment
 import com.example.myapplication.messageFragment.MessageFragment
@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        val database = AccountDatabase.getDatabase(this)
+        val database = AppDatabase.getDatabase(this)
         val phone = sharedPreferences.getString("phone", null).toString()
 
         userInfoViewModel = ViewModelProvider(
@@ -171,5 +171,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
 }

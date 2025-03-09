@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.myapplication.database.Account
-import com.example.myapplication.database.AccountDatabase
+import com.example.myapplication.storage.db.entity.Account
+import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.databinding.ActivityUserInfoBinding
 import com.example.myapplication.util.DialogUtil
 import com.example.myapplication.util.ImageDealHelper
@@ -30,7 +30,7 @@ class UserInfoEdit : AppCompatActivity() {
     }
 
     private val userViewModel: UserInfoViewModel by lazy {
-        val database = AccountDatabase.getDatabase(this)
+        val database = AppDatabase.getDatabase(this)
         ViewModelProvider(
             this,
             UserInfoViewModelFactory(database)

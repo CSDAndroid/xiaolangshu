@@ -3,11 +3,11 @@ package com.example.myapplication.viewModel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.database.AccountDatabase
+import com.example.myapplication.storage.db.AppDatabase
 
 class PictureInfoViewModelFactory(
     private val context: Context,
-    private val database: AccountDatabase
+    private val database: AppDatabase
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PictureInfoViewModel::class.java)) {

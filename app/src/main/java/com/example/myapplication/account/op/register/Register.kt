@@ -1,4 +1,4 @@
-package com.example.myapplication.account.op
+package com.example.myapplication.account.op.register
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -16,7 +16,7 @@ import com.example.myapplication.MainActivity
 import com.example.myapplication.data.responseData.MyResponse1
 import com.example.myapplication.databinding.ActivityRegisterBinding
 import com.example.myapplication.http.HttpInterface
-import com.example.myapplication.http.HttpUtil
+import com.example.myapplication.http.HttpService
 import com.example.myapplication.util.CustomNotification
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,7 +32,7 @@ class Register : AppCompatActivity(), View.OnClickListener {
     }
 
     private val service: HttpInterface by lazy {
-        HttpUtil.sendHttp(address, HttpInterface::class.java)
+        HttpService.sendHttp(address, HttpInterface::class.java)
     }
 
     private val customNotification: CustomNotification by lazy {

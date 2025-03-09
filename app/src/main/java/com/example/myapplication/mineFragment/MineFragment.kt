@@ -19,8 +19,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.adapter.MAdapter
-import com.example.myapplication.database.Account
-import com.example.myapplication.database.AccountDatabase
+import com.example.myapplication.storage.db.entity.Account
+import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.databinding.MinePagerBinding
 import com.example.myapplication.account.op.OP
 import com.example.myapplication.share.Load
@@ -47,7 +47,7 @@ class MineFragment : Fragment() {
     }
 
     private val userViewModel: UserInfoViewModel by lazy {
-        val database = AccountDatabase.getDatabase(requireActivity())
+        val database = AppDatabase.getDatabase(requireActivity())
         ViewModelProvider(
             requireActivity(),
             UserInfoViewModelFactory(database)
@@ -179,17 +179,19 @@ class MineFragment : Fragment() {
         }
 
         Handler(Looper.getMainLooper()).postDelayed({
-            userViewModel.updateUserInfoToRoom(
-                account.introduction,
-                account.birthday,
-                account.sex,
-                account.nickname,
-                account.career,
-                account.phone,
-                account.region,
-                account.school,
-                null
-            )
+            account.nickname?.let {
+                userViewModel.updateUserInfoToRoom(
+                    account.introduction,
+                    account.birthday,
+                    account.sex,
+                    it,
+                    account.career,
+                    account.phone,
+                    account.region,
+                    account.school,
+                    null
+                )
+            }
         }, 1000)
     }
 
