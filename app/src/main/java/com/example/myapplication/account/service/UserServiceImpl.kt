@@ -37,6 +37,19 @@ class UserServiceImpl @Inject constructor(
     }
 
     override suspend fun register(registerRequest: RegisterRequest): Boolean {
-        TODO("Not yet implemented")
+        return try {
+            val result = httpService.register(registerRequest.nickname,registerRequest.phone,registerRequest.password,registerRequest.verificationCode)
+            val account = Account(registerRequest.phone, null, null, registerRequest.password, null, null, null, null, null, null, null)
+            val status = appDatabase.accountDao().insert(account)
+
+            result.isSuccessful && status != -1L
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    override suspend fun sendVerificationCode(phone: String, nickname: String): String {
+        val result = httpService.sendVerificationCode(phone,nickname)
+        return result.body()?.data ?: ""
     }
 }

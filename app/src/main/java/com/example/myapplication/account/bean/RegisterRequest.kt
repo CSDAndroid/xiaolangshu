@@ -4,5 +4,5 @@ data class RegisterRequest(
     val nickname: String,
     val phone: String,
     val password: String,
-    val verificationCode: Int
+    val verificationCode: String
 )

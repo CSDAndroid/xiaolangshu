@@ -12,4 +12,6 @@ interface UserService {
     suspend fun logout(): Boolean
 
     suspend fun register(registerRequest: RegisterRequest): Boolean
+
+    suspend fun sendVerificationCode(phone: String, nickname: String): String
 }

@@ -13,4 +13,8 @@ class RegisterViewModel @Inject constructor(
     suspend fun register(registerRequest: RegisterRequest): Boolean {
         return userService.register(registerRequest)
     }
+
+    suspend fun sendVerificationCode(phone:String, nickname: String): String {
+        return userService.sendVerificationCode(phone, nickname)
+    }
 }

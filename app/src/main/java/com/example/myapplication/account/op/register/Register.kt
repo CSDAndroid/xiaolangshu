@@ -1,47 +1,43 @@
 package com.example.myapplication.account.op.register
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.MainActivity
-import com.example.myapplication.data.responseData.MyResponse1
+import com.example.myapplication.account.bean.RegisterRequest
 import com.example.myapplication.databinding.ActivityRegisterBinding
-import com.example.myapplication.http.HttpInterface
-import com.example.myapplication.http.HttpService
-import com.example.myapplication.util.CustomNotification
-import kotlinx.coroutines.Dispatchers
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class Register : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityRegisterBinding
+    private val viewModel by viewModels<RegisterViewModel>()
     private var standVerificationCode: String = ""
 
-    private val address: String by lazy {
-        "http://8.138.41.189:8085/"
-    }
-
-    private val service: HttpInterface by lazy {
-        HttpService.sendHttp(address, HttpInterface::class.java)
-    }
-
-    private val customNotification: CustomNotification by lazy {
-        CustomNotification(this)
-    }
-
-    private val sharedPreferences: SharedPreferences by lazy {
-        getSharedPreferences("IsLogin", Context.MODE_PRIVATE)
-    }
+//    private val address: String by lazy {
+//        "http://8.138.41.189:8085/"
+//    }
+//
+//    private val service: HttpInterface by lazy {
+//        HttpService.sendHttp(address, HttpInterface::class.java)
+//    }
+//
+//    private val customNotification: CustomNotification by lazy {
+//        CustomNotification(this)
+//    }
+//
+//    private val sharedPreferences: SharedPreferences by lazy {
+//        getSharedPreferences("IsLogin", Context.MODE_PRIVATE)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,61 +74,70 @@ class Register : AppCompatActivity(), View.OnClickListener {
                     }
                 }.start()
 
-                lifecycleScope.launch(Dispatchers.IO) {
+                lifecycleScope.launch {
                     try {
-                        //验证码请求
-                        val response = service.sendVerificationCode(
+                        standVerificationCode = viewModel.sendVerificationCode(
                             binding.resNo.text.toString(),
                             binding.resNickname.text.toString()
                         )
-
-                        //成功响应处理
-                        if (response.isSuccessful) {
-                            val myResponseData = response.body() as MyResponse1
-                            when (myResponseData.msg.toString()) {
-                                "该手机号已使用" -> {
-                                    withContext(Dispatchers.Main) {
-                                        Toast.makeText(
-                                            this@Register, "该手机号已被注册", Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                }
-
-                                "该昵称已使用" -> {
-                                    withContext(Dispatchers.Main) {
-                                        Toast.makeText(
-                                            this@Register, "该昵称已被使用", Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                }
-
-                                else -> {
-                                    standVerificationCode = myResponseData.data
-                                    withContext(Dispatchers.Main) {
-                                        customNotification.showNotification(
-                                            message = standVerificationCode,
-                                            duration = 20000,
-                                        )
-                                    }
-                                }
-                            }
-                        } else {
-                            // 不成功响应处理
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText(
-                                    this@Register, "请求响应失败: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
                     } catch (e: Exception) {
-                        //错误处理
-                        withContext(Dispatchers.Main) {
-                            Log.d("Register.error1", "请求错误: ${e.message}")
-                            Toast.makeText(
-                                this@Register, "请求错误: ${e.message}", Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                        Toast.makeText(this@Register, "网络错误，请稍后再试", Toast.LENGTH_SHORT).show()
                     }
+
+//                    try {
+//                        //验证码请求
+//                        val response = service.sendVerificationCode(
+//                            binding.resNo.text.toString(),
+//                            binding.resNickname.text.toString()
+//                        )
+//
+//                        //成功响应处理
+//                        if (response.isSuccessful) {
+//                            val myResponseData = response.body() as MyResponse1
+//                            when (myResponseData.msg.toString()) {
+//                                "该手机号已使用" -> {
+//                                    withContext(Dispatchers.Main) {
+//                                        Toast.makeText(
+//                                            this@Register, "该手机号已被注册", Toast.LENGTH_SHORT
+//                                        ).show()
+//                                    }
+//                                }
+//
+//                                "该昵称已使用" -> {
+//                                    withContext(Dispatchers.Main) {
+//                                        Toast.makeText(
+//                                            this@Register, "该昵称已被使用", Toast.LENGTH_SHORT
+//                                        ).show()
+//                                    }
+//                                }
+//
+//                                else -> {
+//                                    standVerificationCode = myResponseData.data
+//                                    withContext(Dispatchers.Main) {
+//                                        customNotification.showNotification(
+//                                            message = standVerificationCode,
+//                                            duration = 20000,
+//                                        )
+//                                    }
+//                                }
+//                            }
+//                        } else {
+//                            // 不成功响应处理
+//                            withContext(Dispatchers.Main) {
+//                                Toast.makeText(
+//                                    this@Register, "请求响应失败: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT
+//                                ).show()
+//                            }
+//                        }
+//                    } catch (e: Exception) {
+//                        //错误处理
+//                        withContext(Dispatchers.Main) {
+//                            Log.d("Register.error1", "请求错误: ${e.message}")
+//                            Toast.makeText(
+//                                this@Register, "请求错误: ${e.message}", Toast.LENGTH_SHORT
+//                            ).show()
+//                        }
+//                    }
                 }
             }
         }
@@ -162,51 +167,23 @@ class Register : AppCompatActivity(), View.OnClickListener {
         } else if (verificationCode != standVerificationCode) {
             Toast.makeText(this, "验证码错误", Toast.LENGTH_SHORT).show()
         } else {
-            lifecycleScope.launch(Dispatchers.IO) {
+            binding.register.isEnabled = false
+            lifecycleScope.launch {
                 try {
-                    //注册请求
-                    val response = service.register(
-                        nickname,
-                        telephone,
-                        pwd,
-                        verificationCode
-                    )
-                    //成功处理
-                    if (response.isSuccessful) {
-                        if (response.body()?.data == "注册成功") {
-                            withContext(Dispatchers.Main) {
-                                val edit = sharedPreferences.edit()
-                                edit.putBoolean("isLogin", true)
-                                edit.putString("phone", telephone)
-                                edit.apply()
-
-                                val intent = Intent(this@Register, MainActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                            }
-                        } else {
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText(
-                                    this@Register, "注册失败: 该账号可能已被注册", Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
+                    val registerRequest = RegisterRequest(nickname, telephone, pwd, verificationCode)
+                    if (viewModel.register(registerRequest)) {
+                        Toast.makeText(this@Register, "注册成功", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@Register, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     } else {
-                        //不成功响应处理
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(
-                                this@Register, "注测响应失败: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                        Toast.makeText(this@Register, "注册失败，该手机号已注册", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 } catch (e: Exception) {
-                    //错误处理
-                    Log.d("Register.error2", "请求错误: ${e.message}")
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(
-                            this@Register, "请求错误: ${e.message}", Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    Toast.makeText(this@Register, "网络错误，请稍后再试", Toast.LENGTH_SHORT).show()
+                } finally {
+                    binding.register.isEnabled = true
                 }
             }
         }
