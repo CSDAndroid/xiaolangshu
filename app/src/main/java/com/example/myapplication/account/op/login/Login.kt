@@ -30,19 +30,19 @@ class Login : AppCompatActivity(), View.OnClickListener {
             finish()
         }
 
-        binding.login.setOnClickListener(this)
+        binding.logButton.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        val telephone = binding.logNo.text.toString()
-        val pwd = binding.logPwd.text.toString()
+        val telephone = binding.logPhone.text.toString()
+        val pwd = binding.logPassword.text.toString()
 
         if (telephone.isEmpty()) {
             Toast.makeText(this, "请输入电话号码", Toast.LENGTH_SHORT).show()
         } else if (pwd.isEmpty()) {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show()
         } else {
-            binding.login.isEnabled = false // 禁止重复点击
+            binding.logButton.isEnabled = false // 禁止重复点击
             lifecycleScope.launch {
                 try {
                     val loginRequest = LoginRequest(telephone, pwd)
@@ -62,7 +62,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
                 } catch (e: Exception) {
                     Toast.makeText(this@Login, "网络错误，请稍后再试", Toast.LENGTH_SHORT).show()
                 } finally {
-                    binding.login.isEnabled = true // 登录结束后重新启用按钮
+                    binding.logButton.isEnabled = true // 登录结束后重新启用按钮
                 }
             }
         }

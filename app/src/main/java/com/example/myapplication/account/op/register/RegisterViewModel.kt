@@ -10,6 +10,7 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(
     private val userService: UserService
 ): ViewModel() {
+
     suspend fun register(registerRequest: RegisterRequest): Boolean {
         return userService.register(registerRequest)
     }

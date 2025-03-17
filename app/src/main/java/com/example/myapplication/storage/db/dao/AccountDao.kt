@@ -15,10 +15,10 @@ interface AccountDao {
     suspend fun insert(account: Account): Long
 
     @Update(entity = Account::class)
-    suspend fun update(account: Account)
+    suspend fun update(account: Account): Int
 
     @Delete(entity = Account::class)
-    suspend fun delete(account: Account)
+    suspend fun delete(account: Account): Int
 
     @Query("SELECT * FROM account WHERE phone = :phone LIMIT 1")
     suspend fun getAccount(phone: String): Account

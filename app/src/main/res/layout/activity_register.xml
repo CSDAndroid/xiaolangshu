@@ -56,7 +56,7 @@
             android:textColorHint="@color/md_theme_outline" />
 
         <EditText
-            android:id="@+id/res_no"
+            android:id="@+id/res_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -72,7 +72,7 @@
             android:textColorHint="@color/md_theme_outline" />
 
         <EditText
-            android:id="@+id/res_pwd"
+            android:id="@+id/res_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -88,7 +88,7 @@
             android:textColorHint="@color/md_theme_outline" />
 
         <EditText
-            android:id="@+id/res_pwd1"
+            android:id="@+id/res_password1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -126,7 +126,7 @@
                 android:textColorHint="@color/md_theme_outline" />
 
             <Button
-                android:id="@+id/res_requestVerificationCode"
+                android:id="@+id/res_requestVerificationCode_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -141,7 +141,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/register"
+            android:id="@+id/res_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

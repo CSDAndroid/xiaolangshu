@@ -40,7 +40,7 @@
             android:name=".search.Search"
             android:exported="false" />
         <activity
-            android:name=".mineFragment.UserInfoEdit"
+            android:name=".account.userProfile.UserInfoEdit"
             android:exported="false" />
         <activity
             android:name=".account.op.OP"
