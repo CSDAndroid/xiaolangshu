@@ -29,36 +29,9 @@ interface AccountDao {
     @Query("SELECT background FROM account WHERE phone = :phone LIMIT 1")
     suspend fun getBackground(phone: String): String?
 
-    @Query("UPDATE account SET nickname = :name WHERE phone = :phone")
-    suspend fun updateNickname(name: String, phone: String)
-
     @Query("UPDATE account SET avatar = :avatar WHERE phone = :phone")
-    suspend fun updateAvatar(avatar: String, phone: String)
+    suspend fun updateAvatar(avatar: String, phone: String): Int
 
     @Query("UPDATE account SET background = :background WHERE phone = :phone")
-    suspend fun updateBackground(background: String, phone: String)
-
-    @Query(
-        """
-        UPDATE account
-        SET introduction = :introduction,
-            birthday = :birthday,
-            sex = :sex,
-            nickname = :nickname,
-            career = :career,
-            region = :region,
-            school = :school
-        WHERE phone = :phone
-    """
-    )
-    suspend fun updateAccountByPhone(
-        introduction: String?,
-        birthday: String?,
-        sex: String?,
-        nickname: String,
-        career: String?,
-        region: String?,
-        school: String?,
-        phone: String
-    )
+    suspend fun updateBackground(background: String, phone: String): Int
 }

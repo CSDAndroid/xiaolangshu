@@ -11,12 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import com.yalantis.ucrop.UCrop
+import dagger.hilt.android.scopes.ActivityScoped
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.Locale
+import javax.inject.Inject
 
-object ImageDealHelper {
+@ActivityScoped
+class ImageDealHelper @Inject constructor(private val context: Context) {
     private lateinit var getContentLauncher: ActivityResultLauncher<String>
     private lateinit var cropImageLauncher: ActivityResultLauncher<Intent>
     private var selectedTag: String? = null
@@ -26,12 +29,6 @@ object ImageDealHelper {
         onImageSelected: (Uri, String) -> Unit?,
         onImageCropped: (Uri, String) -> Unit
     ) {
-        val context = when (lifecycleOwner) {
-            is FragmentActivity -> lifecycleOwner
-            is Fragment -> lifecycleOwner.requireContext()
-            else -> throw IllegalArgumentException("LifecycleOwner must be either FragmentActivity or Fragment")
-        }
-
         val activityResultRegistry = when (lifecycleOwner) {
             is FragmentActivity -> lifecycleOwner.activityResultRegistry
             is Fragment -> lifecycleOwner.requireActivity().activityResultRegistry
@@ -44,7 +41,7 @@ object ImageDealHelper {
         ) { result: Uri? ->
             result?.let {
                 onImageSelected(it, selectedTag.toString())
-                startCrop(context, it)
+                startCrop(it)
             }
         }
 
@@ -62,42 +59,46 @@ object ImageDealHelper {
         }
     }
 
-    fun openGallery(tag: String?) {
+    fun openGallery(tag: String) {
         selectedTag = tag
         getContentLauncher.launch("image/*")
     }
 
-    private fun startCrop(context: Context, sourceUri: Uri) {
+    private fun startCrop(sourceUri: Uri) {
         val timestamp = System.currentTimeMillis()
         val destinationUri = Uri.fromFile(File(context.cacheDir, "cropped_image_$timestamp.jpg"))
-        when (selectedTag) {
+
+        val uCrop = when (selectedTag) {
             "avatar" -> {
-                val uCrop = UCrop.of(sourceUri, destinationUri)
-                    .withAspectRatio(1f, 1f) // 设定裁剪比例
-                    .withMaxResultSize(500, 500) // 最后图片的大小
+                UCrop.of(sourceUri, destinationUri)
+                    .withAspectRatio(1f, 1f) // 设置裁剪比例
+                    .withMaxResultSize(500, 500) // 设置最大结果大小
                     .withOptions(UCrop.Options().apply {
                         setFreeStyleCropEnabled(true) // 启用自由裁剪
                         setCircleDimmedLayer(true) // 设置圆角裁剪
                     })
-                cropImageLauncher.launch(uCrop.getIntent(context)) // 启动裁剪活动
             }
 
             "backgroundImage" -> {
-                val uCrop = UCrop.of(sourceUri, destinationUri)
-                    .withAspectRatio(4f, 3f) // 设定裁剪比例
-                    .withMaxResultSize(2200, 1900) // 最后图片的大小
-                cropImageLauncher.launch(uCrop.getIntent(context)) // 启动裁剪活动
+                UCrop.of(sourceUri, destinationUri)
+                    .withAspectRatio(4f, 3f) // 设置裁剪比例
+                    .withMaxResultSize(2200, 1900) // 设置最大结果大小
             }
+
+            null -> return // 如果没有选择的标签，直接返回
+            else -> return // 处理未定义的标签
         }
+
+        cropImageLauncher.launch(uCrop.getIntent(context)) // 启动裁剪活动
     }
 
-    fun getRealPathFromUri(context: Context, uri: Uri): File? {
+    fun getRealPathFromUri(uri: Uri): File? {
         var file: File? = null
         try {
             // 创建一个临时文件
             val tempFile = File.createTempFile("tempImage", ".jpg", context.cacheDir)
             Log.d("getRealPathFromUri", tempFile.toString())
-            // 使用ContentResolver和InputStream读取Uri指向的文件内容
+            // 使用 ContentResolver 和 InputStream 读取 Uri 指向的文件内容
             val inputStream = context.contentResolver.openInputStream(uri)
             val outputStream = FileOutputStream(tempFile)
             inputStream?.copyTo(outputStream)

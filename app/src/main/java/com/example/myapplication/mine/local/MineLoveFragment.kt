@@ -1,4 +1,4 @@
-package com.example.myapplication.mineFragment
+package com.example.myapplication.mine.local
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,12 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.adapter.PrePictureViewAdapter
+import com.example.myapplication.adapter.CommentAdapter
 import com.example.myapplication.data.Item
 import com.example.myapplication.data.VideoInfo
 import com.example.myapplication.data.pictureData.Picture1
 import com.example.myapplication.storage.db.AppDatabase
-import com.example.myapplication.databinding.MineCollectionPagerBinding
+import com.example.myapplication.databinding.MineLovePagerBinding
 import com.example.myapplication.lister.OnLikeLister
 import com.example.myapplication.util.SpaceItem
 import com.example.myapplication.viewModel.PictureInfoViewModel
@@ -24,20 +24,18 @@ import com.example.myapplication.viewModel.PictureInfoViewModelFactory
 import com.example.myapplication.viewModel.VideoInfoViewModel
 import com.example.myapplication.viewModel.VideoInfoViewModelFactory
 
-class MineCollectionFragment : Fragment(), OnLikeLister {
+class MineLoveFragment : Fragment(), OnLikeLister {
 
-    private var _binding: MineCollectionPagerBinding? = null
+    private var _binding: MineLovePagerBinding? = null
     private val binding get() = _binding!!
-    private var isLoading: Boolean = false
 
-    private val pictureCollectionInfoList: MutableList<Picture1> = mutableListOf()
-    private val pictureLikeInfoList: MutableList<Picture1> = mutableListOf()
-    private val videoCollectionInfoList: MutableList<VideoInfo> = mutableListOf()
-    private val videoLikeInfoList: MutableList<VideoInfo> = mutableListOf()
+    private var isLoading = false
     private val itemList: MutableList<Item> = mutableListOf()
+    private val pictureLikeInfoList: MutableList<Picture1> = mutableListOf()
+    private val videoLikeInfoList: MutableList<VideoInfo> = mutableListOf()
 
-    private val mAdapter: PrePictureViewAdapter by lazy {
-        PrePictureViewAdapter(this, pictureCollectionInfoList, phone)
+    private val mAdapter: CommentAdapter by lazy {
+        CommentAdapter(this, itemList, phone, "")
     }
 
     private val phone: String by lazy {
@@ -71,69 +69,51 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MineCollectionPagerBinding.inflate(inflater, container, false)
+        _binding = MineLovePagerBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getVideoCollectionList()
-        getPictureCollectionList()
+        getPictureLikeList()
+        getVideoLikeList()
         initRecycleView()
     }
 
     override fun onResume() {
         super.onResume()
-        getVideoCollectionList()
-        getPictureCollectionList()
+        getPictureLikeList()
+        getVideoLikeList()
+        delayInit()
     }
 
-    private fun getPictureCollectionList() {
+    private fun getPictureLikeList() {
         pictureInfoViewModel.apply {
-            pictureCollectionList.observe(viewLifecycleOwner) {
-                it?.let { updateInfoList(it, pictureCollectionInfoList) }
-            }
-
             pictureLikeList.observe(viewLifecycleOwner) {
                 it?.let { updateInfoLikeList(it, pictureLikeInfoList) }
             }
-        }
-
-        pictureInfoViewModel.getPictureLikeList(phone)
-        pictureInfoViewModel.getPictureCollectionList(phone)
+        }.getPictureLikeList(phone)
     }
 
-    private fun getVideoCollectionList() {
+    private fun getVideoLikeList() {
         videoInfoViewModel.apply {
-            videoCollectionList.observe(viewLifecycleOwner) {
-                it?.let { updateInfoList(it, videoCollectionInfoList) }
-            }
-
             videoLikeList.observe(viewLifecycleOwner) {
                 it?.let { updateInfoLikeList(it, videoLikeInfoList) }
             }
-        }
-
-        videoInfoViewModel.getVideoLikeList(phone)
-        videoInfoViewModel.getVideoCollectionList(phone)
+        }.getVideoLikeList(phone)
     }
 
     private fun <T : Any> updateInfoLikeList(likeList: List<T>, likeInfoList: MutableList<T>) {
-        likeInfoList.clear()
-        likeInfoList.addAll(likeList)
-    }
-
-    private fun <T : Any> updateInfoList(list: List<T>, infoList: MutableList<T>) {
-        if (infoList.isEmpty()) {
-            infoList.addAll(list)
+        if (likeInfoList.isEmpty()) {
+            likeInfoList.addAll(likeList)
             delayInit()
         } else {
-            val exists = infoList.toSet()
-            val newItems = list.filterNot { exists.contains(it) }
+            val exits = likeInfoList.toSet()
+            val items = likeList.filter { exits.contains(it) }
 
-            if (newItems.isNotEmpty()) {
-                infoList.addAll(list)
+            if (items.isNotEmpty()) {
+                likeInfoList.addAll(items)
                 delayInit()
             }
             isLoading = false
@@ -142,15 +122,15 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun delayInit() {
-        if (videoCollectionInfoList.isNotEmpty() || pictureCollectionInfoList.isNotEmpty()) {
-            videoCollectionInfoList.forEach { itemList.add(Item.Video(it)) }
-            pictureCollectionInfoList.forEach { itemList.add(Item.Picture(it)) }
-            mAdapter.notifyDataSetChanged()
+        if (itemList.isEmpty()) {
+            videoLikeInfoList.forEach { itemList.add(Item.Video(it)) }
+            pictureLikeInfoList.forEach { itemList.add(Item.Picture(it)) }
+            mAdapter.notifyItemRangeInserted(0, itemList.size)
         }
     }
 
     private fun initRecycleView() {
-        binding.mineCollectionRecycleView.apply {
+        binding.mineLoveRecycleView.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             addItemDecoration(SpaceItem(space = 2))
             adapter = mAdapter
@@ -159,8 +139,8 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
                     super.onScrolled(recyclerView, dx, dy)
                     if (!recyclerView.canScrollVertically(1) && !isLoading) {
                         isLoading = true
-                        videoInfoViewModel.getVideoCollectionList(phone)
-                        pictureInfoViewModel.getPictureCollectionList(phone)
+                        videoInfoViewModel.getVideoLikeList(phone)
+                        pictureInfoViewModel.getPictureLikeList(phone)
                     }
                 }
             })

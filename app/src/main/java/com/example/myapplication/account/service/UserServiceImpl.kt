@@ -14,9 +14,11 @@ import javax.inject.Singleton
 class UserServiceImpl @Inject constructor(
     private val appDatabase: AppDatabase,
     private val preferencesManager: PreferencesManager
-): UserService {
+) : UserService {
     private val address: String = "http://8.138.41.189:8085/"
-    private val accountApiService: AccountApi by lazy { HttpService.sendHttp(address, AccountApi::class.java) }
+    private val accountApiService: AccountApi by lazy {
+        HttpService.sendHttp(address, AccountApi::class.java)
+    }
 
     override fun isLogin(): Boolean {
         return preferencesManager.getPhone() != null
@@ -27,49 +29,33 @@ class UserServiceImpl @Inject constructor(
     }
 
     override suspend fun login(loginRequest: LoginRequest): Boolean {
-        return try {
-            val result = accountApiService.login(loginRequest)
-            val account = Account(loginRequest.phone, null, null, loginRequest.password, null, null, null, null, null, null, null)
-            val status = appDatabase.accountDao().insert(account)
-            preferencesManager.savePhone(loginRequest.phone)
+        val result = accountApiService.login(loginRequest)
+        val account = Account(loginRequest.phone, null, null, loginRequest.password, null, null, null, null, null, null, null)
+        val status = appDatabase.accountDao().insert(account)
+        preferencesManager.savePhone(loginRequest.phone)
 
-            result.isSuccessful && status != -1L
-        } catch (e: Exception) {
-            false
-        }
+        return result.isSuccessful && status != -1L
     }
 
     override suspend fun logout(account: Account): Boolean {
-        return try {
-            val status = appDatabase.accountDao().delete(account)
-            preferencesManager.clearPhone()
+        val status = appDatabase.accountDao().delete(account)
+        preferencesManager.clearPhone()
 
-            status != 0
-        } catch (e: Exception) {
-            false
-        }
-    }
-
-    override suspend fun register(registerRequest: RegisterRequest): Boolean {
-        return try {
-            val result = accountApiService.register(registerRequest.nickname,registerRequest.phone,registerRequest.password,registerRequest.verificationCode)
-            val account = Account(registerRequest.phone, null, null, registerRequest.password, null, null, null, null, null, null, null)
-            val status = appDatabase.accountDao().insert(account)
-            preferencesManager.savePhone(registerRequest.phone)
-
-            result.isSuccessful && status != -1L
-        } catch (e: Exception) {
-            false
-        }
+        return status != 0
     }
 
     override suspend fun sendVerificationCode(phone: String, nickname: String): String {
-        return try {
-            val result = accountApiService.sendVerificationCode(phone,nickname)
-            result.body()?.data ?: ""
-        } catch (e: Exception) {
-            " "
-        }
+        val result = accountApiService.sendVerificationCode(phone, nickname)
+        return result.body()?.data ?: ""
+    }
+
+    override suspend fun register(registerRequest: RegisterRequest): Boolean {
+        val result = accountApiService.register(registerRequest.nickname, registerRequest.phone, registerRequest.password, registerRequest.verificationCode)
+        val account = Account(registerRequest.phone, null, null, registerRequest.password, null, null, null, null, null, null, null)
+        val status = appDatabase.accountDao().insert(account)
+        preferencesManager.savePhone(registerRequest.phone)
+
+        return result.isSuccessful && status != -1L
     }
 
     override suspend fun getUserProfile(phone: String): Account {
@@ -77,11 +63,7 @@ class UserServiceImpl @Inject constructor(
     }
 
     override suspend fun updateUserProfile(account: Account): Boolean {
-        return try {
-            val status = appDatabase.accountDao().update(account)
-            status != 0
-        } catch (e: Exception) {
-            false
-        }
+        val status = appDatabase.accountDao().update(account)
+        return status != 0
     }
 }

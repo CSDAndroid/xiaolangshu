@@ -53,11 +53,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(
-                            this@Login,
-                            "登录失败，请检查账号密码是否正确",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@Login, "登录失败，请检查账号密码是否正确", Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     Toast.makeText(this@Login, "网络错误，请稍后再试", Toast.LENGTH_SHORT).show()

@@ -43,6 +43,7 @@ class UserProfileViewModel @Inject constructor(
                 val isUpdated = userService.updateUserProfile(account)
                 _updateStatusLiveData.postValue(isUpdated)
             } catch (e: Exception) {
+                _updateStatusLiveData.postValue(false)
                 Log.e("更新用户",e.message.toString())
             }
         }

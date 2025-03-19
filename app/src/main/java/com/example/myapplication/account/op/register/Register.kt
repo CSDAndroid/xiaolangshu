@@ -59,13 +59,9 @@ class Register : AppCompatActivity(), View.OnClickListener {
 
                 lifecycleScope.launch {
                     try {
-                        standVerificationCode = viewModel.sendVerificationCode(
-                            binding.resPhone.text.toString(),
-                            binding.resNickname.text.toString()
-                        )
+                        standVerificationCode = viewModel.sendVerificationCode(binding.resPhone.text.toString(), binding.resNickname.text.toString())
                     } catch (e: Exception) {
-                        Toast.makeText(this@Register, "网络错误，请稍后再试", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(this@Register, "网络错误，请稍后再试", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -99,16 +95,14 @@ class Register : AppCompatActivity(), View.OnClickListener {
             binding.resButton.isEnabled = false
             lifecycleScope.launch {
                 try {
-                    val registerRequest =
-                        RegisterRequest(nickname, telephone, pwd, verificationCode)
+                    val registerRequest = RegisterRequest(nickname, telephone, pwd, verificationCode)
                     if (viewModel.register(registerRequest)) {
                         Toast.makeText(this@Register, "注册成功", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@Register, MainActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this@Register, "注册失败，该手机号已注册", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(this@Register, "注册失败，该手机号已注册", Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     Toast.makeText(this@Register, "网络错误，请稍后再试", Toast.LENGTH_SHORT).show()

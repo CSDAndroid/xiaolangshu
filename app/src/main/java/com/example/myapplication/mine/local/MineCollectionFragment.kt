@@ -1,4 +1,4 @@
-package com.example.myapplication.mineFragment
+package com.example.myapplication.mine.local
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -16,7 +16,7 @@ import com.example.myapplication.data.Item
 import com.example.myapplication.data.VideoInfo
 import com.example.myapplication.data.pictureData.Picture1
 import com.example.myapplication.storage.db.AppDatabase
-import com.example.myapplication.databinding.MineWorkPagerBinding
+import com.example.myapplication.databinding.MineCollectionPagerBinding
 import com.example.myapplication.lister.OnLikeLister
 import com.example.myapplication.util.SpaceItem
 import com.example.myapplication.viewModel.PictureInfoViewModel
@@ -24,20 +24,20 @@ import com.example.myapplication.viewModel.PictureInfoViewModelFactory
 import com.example.myapplication.viewModel.VideoInfoViewModel
 import com.example.myapplication.viewModel.VideoInfoViewModelFactory
 
-class MineWorkFragment : Fragment(), OnLikeLister {
+class MineCollectionFragment : Fragment(), OnLikeLister {
 
-    private var _binding: MineWorkPagerBinding? = null
+    private var _binding: MineCollectionPagerBinding? = null
     private val binding get() = _binding!!
     private var isLoading: Boolean = false
 
-    private val pictureWorkInfoList: MutableList<Picture1> = mutableListOf()
+    private val pictureCollectionInfoList: MutableList<Picture1> = mutableListOf()
     private val pictureLikeInfoList: MutableList<Picture1> = mutableListOf()
-    private val videoWorkInfoList: MutableList<VideoInfo> = mutableListOf()
+    private val videoCollectionInfoList: MutableList<VideoInfo> = mutableListOf()
     private val videoLikeInfoList: MutableList<VideoInfo> = mutableListOf()
     private val itemList: MutableList<Item> = mutableListOf()
 
     private val mAdapter: PrePictureViewAdapter by lazy {
-        PrePictureViewAdapter(this, pictureWorkInfoList, phone)
+        PrePictureViewAdapter(this, pictureCollectionInfoList, phone)
     }
 
     private val phone: String by lazy {
@@ -71,28 +71,28 @@ class MineWorkFragment : Fragment(), OnLikeLister {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MineWorkPagerBinding.inflate(inflater, container, false)
+        _binding = MineCollectionPagerBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getVideoCollectionList()
+        getPictureCollectionList()
         initRecycleView()
-        getVideoWorkList()
-        getPictureWorkList()
     }
 
     override fun onResume() {
         super.onResume()
-        getVideoWorkList()
-        getPictureWorkList()
+        getVideoCollectionList()
+        getPictureCollectionList()
     }
 
-    private fun getPictureWorkList() {
+    private fun getPictureCollectionList() {
         pictureInfoViewModel.apply {
-            pictureWorkList.observe(viewLifecycleOwner) {
-                it?.let { updateInfoList(it, pictureWorkInfoList) }
+            pictureCollectionList.observe(viewLifecycleOwner) {
+                it?.let { updateInfoList(it, pictureCollectionInfoList) }
             }
 
             pictureLikeList.observe(viewLifecycleOwner) {
@@ -101,13 +101,13 @@ class MineWorkFragment : Fragment(), OnLikeLister {
         }
 
         pictureInfoViewModel.getPictureLikeList(phone)
-        pictureInfoViewModel.getPictureWorkList(phone)
+        pictureInfoViewModel.getPictureCollectionList(phone)
     }
 
-    private fun getVideoWorkList() {
+    private fun getVideoCollectionList() {
         videoInfoViewModel.apply {
-            videoWorkList.observe(viewLifecycleOwner) {
-                it?.let { updateInfoList(it, videoWorkInfoList) }
+            videoCollectionList.observe(viewLifecycleOwner) {
+                it?.let { updateInfoList(it, videoCollectionInfoList) }
             }
 
             videoLikeList.observe(viewLifecycleOwner) {
@@ -116,7 +116,7 @@ class MineWorkFragment : Fragment(), OnLikeLister {
         }
 
         videoInfoViewModel.getVideoLikeList(phone)
-        videoInfoViewModel.getVideoWorkList(phone)
+        videoInfoViewModel.getVideoCollectionList(phone)
     }
 
     private fun <T : Any> updateInfoLikeList(likeList: List<T>, likeInfoList: MutableList<T>) {
@@ -142,15 +142,15 @@ class MineWorkFragment : Fragment(), OnLikeLister {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun delayInit() {
-        if (videoWorkInfoList.isNotEmpty() || pictureWorkInfoList.isNotEmpty()) {
-            videoWorkInfoList.forEach { itemList.add(Item.Video(it)) }
-            pictureWorkInfoList.forEach { itemList.add(Item.Picture(it)) }
+        if (videoCollectionInfoList.isNotEmpty() || pictureCollectionInfoList.isNotEmpty()) {
+            videoCollectionInfoList.forEach { itemList.add(Item.Video(it)) }
+            pictureCollectionInfoList.forEach { itemList.add(Item.Picture(it)) }
             mAdapter.notifyDataSetChanged()
         }
     }
 
     private fun initRecycleView() {
-        binding.mineWorkRecycleView.apply {
+        binding.mineCollectionRecycleView.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             addItemDecoration(SpaceItem(space = 2))
             adapter = mAdapter
@@ -159,8 +159,8 @@ class MineWorkFragment : Fragment(), OnLikeLister {
                     super.onScrolled(recyclerView, dx, dy)
                     if (!recyclerView.canScrollVertically(1) && !isLoading) {
                         isLoading = true
-                        pictureInfoViewModel.getPictureWorkList(phone)
-                        videoInfoViewModel.getVideoWorkList(phone)
+                        videoInfoViewModel.getVideoCollectionList(phone)
+                        pictureInfoViewModel.getPictureCollectionList(phone)
                     }
                 }
             })
