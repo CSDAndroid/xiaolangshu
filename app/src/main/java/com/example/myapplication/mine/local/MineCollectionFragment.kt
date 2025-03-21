@@ -23,22 +23,21 @@ import com.example.myapplication.viewModel.PictureInfoViewModel
 import com.example.myapplication.viewModel.PictureInfoViewModelFactory
 import com.example.myapplication.viewModel.VideoInfoViewModel
 import com.example.myapplication.viewModel.VideoInfoViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MineCollectionFragment : Fragment(), OnLikeLister {
 
     private var _binding: MineCollectionPagerBinding? = null
     private val binding get() = _binding!!
     private var isLoading: Boolean = false
 
-    private val pictureCollectionInfoList: MutableList<Picture1> = mutableListOf()
-    private val pictureLikeInfoList: MutableList<Picture1> = mutableListOf()
     private val videoCollectionInfoList: MutableList<VideoInfo> = mutableListOf()
     private val videoLikeInfoList: MutableList<VideoInfo> = mutableListOf()
     private val itemList: MutableList<Item> = mutableListOf()
 
-    private val mAdapter: PrePictureViewAdapter by lazy {
-        PrePictureViewAdapter(this, pictureCollectionInfoList, phone)
-    }
+    private lateinit var mAdapter: PrePictureViewAdapter
 
     private val phone: String by lazy {
         sharedPreferences.getString("phone", null).toString()
@@ -48,9 +47,8 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
         requireContext().getSharedPreferences("IsLogin", Context.MODE_PRIVATE)
     }
 
-    private val database: AppDatabase by lazy {
-        AppDatabase.getDatabase(requireActivity())
-    }
+    @Inject
+    lateinit var database: AppDatabase
 
     private val pictureInfoViewModel: PictureInfoViewModel by lazy {
         ViewModelProvider(
@@ -77,31 +75,6 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        getVideoCollectionList()
-        getPictureCollectionList()
-        initRecycleView()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getVideoCollectionList()
-        getPictureCollectionList()
-    }
-
-    private fun getPictureCollectionList() {
-        pictureInfoViewModel.apply {
-            pictureCollectionList.observe(viewLifecycleOwner) {
-                it?.let { updateInfoList(it, pictureCollectionInfoList) }
-            }
-
-            pictureLikeList.observe(viewLifecycleOwner) {
-                it?.let { updateInfoLikeList(it, pictureLikeInfoList) }
-            }
-        }
-
-        pictureInfoViewModel.getPictureLikeList(phone)
-        pictureInfoViewModel.getPictureCollectionList(phone)
     }
 
     private fun getVideoCollectionList() {
@@ -142,9 +115,8 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun delayInit() {
-        if (videoCollectionInfoList.isNotEmpty() || pictureCollectionInfoList.isNotEmpty()) {
+        if (videoCollectionInfoList.isNotEmpty()) {
             videoCollectionInfoList.forEach { itemList.add(Item.Video(it)) }
-            pictureCollectionInfoList.forEach { itemList.add(Item.Picture(it)) }
             mAdapter.notifyDataSetChanged()
         }
     }
@@ -160,7 +132,6 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
                     if (!recyclerView.canScrollVertically(1) && !isLoading) {
                         isLoading = true
                         videoInfoViewModel.getVideoCollectionList(phone)
-                        pictureInfoViewModel.getPictureCollectionList(phone)
                     }
                 }
             })
@@ -173,7 +144,7 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
     }
 
     override fun onLike(phone: String, id: Long) {
-        pictureInfoViewModel.setPictureLikeOrNo(phone, id)
+        TODO()
     }
 
     override fun onLike(phone: String, videoInfo: VideoInfo) {
@@ -181,7 +152,7 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
     }
 
     override fun isLike(picture1: Picture1, phone: String): Boolean {
-        return pictureLikeInfoList.contains(picture1)
+        TODO()
     }
 
     override fun isLike(videoInfo: VideoInfo, phone: String): Boolean {

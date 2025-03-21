@@ -173,7 +173,7 @@
                             android:orientation="horizontal">
 
                             <ImageButton
-                                android:id="@+id/mine_edit_userInfo"
+                                android:id="@+id/mine_edit_userProfile"
                                 android:layout_width="100dp"
                                 android:layout_height="35dp"
                                 android:layout_gravity="center_horizontal"

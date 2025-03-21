@@ -1,9 +1,7 @@
 package com.example.myapplication
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -12,36 +10,27 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
+import com.example.myapplication.account.op.OP
+import com.example.myapplication.account.service.UserService
 import com.example.myapplication.adapter.MAdapter
-import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.mainFragment.MainFragment
 import com.example.myapplication.messageFragment.MessageFragment
 import com.example.myapplication.mine.home.MineFragment
-import com.example.myapplication.account.op.OP
 import com.example.myapplication.pictureFragment.PictureFragment
-import com.example.myapplication.viewModel.PictureInfoViewModel
-import com.example.myapplication.viewModel.PictureInfoViewModelFactory
-import com.example.myapplication.viewModel.UserInfoViewModel
-import com.example.myapplication.viewModel.UserInfoViewModelFactory
-import com.example.myapplication.viewModel.VideoInfoViewModel
-import com.example.myapplication.viewModel.VideoInfoViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private lateinit var fragments: List<Fragment>
-    private lateinit var userInfoViewModel: UserInfoViewModel
-    private lateinit var videoViewModel: VideoInfoViewModel
-    private lateinit var pictureInfoViewModel: PictureInfoViewModel
     private val PERMISSION_REQUEST_CODE = 1
 
-    private val sharedPreferences: SharedPreferences by lazy {
-        getSharedPreferences("IsLogin", Context.MODE_PRIVATE)
-    }
+    @Inject
+    lateinit var userService: UserService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,14 +43,12 @@ class MainActivity : AppCompatActivity() {
         }
 
 //        judgeIsLogin()
-        initViewModel()
         initViewPager()
         initRadioGroup()
     }
 
     private fun judgeIsLogin() {
-        val isLogin = sharedPreferences.getBoolean("isLogin", false)
-        if (!isLogin) {
+        if (!userService.isLogin()) {
             val intent = Intent(this, OP::class.java)
             startActivity(intent)
             finish()
@@ -114,33 +101,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initViewModel() {
-        val database = AppDatabase.getDatabase(this)
-        val phone = sharedPreferences.getString("phone", null).toString()
-
-        userInfoViewModel = ViewModelProvider(
-            this,
-            UserInfoViewModelFactory(database)
-        )[UserInfoViewModel::class.java]
-
-        videoViewModel = ViewModelProvider(
-            this,
-            VideoInfoViewModelFactory(this, database)
-        )[VideoInfoViewModel::class.java]
-
-        pictureInfoViewModel = ViewModelProvider(
-            this,
-            PictureInfoViewModelFactory(this, database)
-        )[PictureInfoViewModel::class.java]
-
-        userInfoViewModel.getUserInfoFromNetwork(phone)
-    }
-
     private fun hasPermission(): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_MEDIA_IMAGES
+            ) == PackageManager.PERMISSION_GRANTED
         } else {
-            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
         }
     }
 

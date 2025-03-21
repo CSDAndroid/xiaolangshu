@@ -23,7 +23,10 @@ import com.example.myapplication.viewModel.PictureInfoViewModel
 import com.example.myapplication.viewModel.PictureInfoViewModelFactory
 import com.example.myapplication.viewModel.VideoInfoViewModel
 import com.example.myapplication.viewModel.VideoInfoViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MineLoveFragment : Fragment(), OnLikeLister {
 
     private var _binding: MineLovePagerBinding? = null
@@ -46,9 +49,8 @@ class MineLoveFragment : Fragment(), OnLikeLister {
         requireContext().getSharedPreferences("IsLogin", Context.MODE_PRIVATE)
     }
 
-    private val database: AppDatabase by lazy {
-        AppDatabase.getDatabase(requireActivity())
-    }
+    @Inject
+    lateinit var database: AppDatabase
 
     private val pictureInfoViewModel: PictureInfoViewModel by lazy {
         ViewModelProvider(

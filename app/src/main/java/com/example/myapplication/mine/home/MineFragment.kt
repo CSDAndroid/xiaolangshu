@@ -13,14 +13,14 @@ import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
-import com.example.myapplication.adapter.MAdapter
-import com.example.myapplication.storage.db.entity.Account
-import com.example.myapplication.databinding.MinePagerBinding
 import com.example.myapplication.account.userProfile.UserProfileEdit
+import com.example.myapplication.adapter.MAdapter
+import com.example.myapplication.databinding.MinePagerBinding
 import com.example.myapplication.mine.local.MineCollectionFragment
 import com.example.myapplication.mine.local.MineLoveFragment
 import com.example.myapplication.mine.local.MineWorkFragment
 import com.example.myapplication.share.Load
+import com.example.myapplication.storage.db.entity.Account
 import com.example.myapplication.util.ImageDealHelper
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -34,10 +34,11 @@ class MineFragment : Fragment() {
     @Inject
     lateinit var imageDealHelper: ImageDealHelper
 
-    private val viewModel by viewModels<MineViewModel> ()
+    private val viewModel by viewModels<MineViewModel>()
     private val phone: String by lazy { viewModel.getPhone() ?: "" }
 
     private lateinit var fragments: List<Fragment>
+    private lateinit var account: Account
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,14 +51,13 @@ class MineFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initSwipeRefreshLayout()
         initNavigationView()
-        toEditUserInfo()
+        toEditUserProfile()
         toLoadWork()
         initRadioGroup()
         initViewPager()
-        getUserInfo()
+        getUserProFile()
     }
 
     private fun initSwipeRefreshLayout() {
@@ -76,6 +76,7 @@ class MineFragment : Fragment() {
                     showLogoutDialog()
                     true
                 }
+
                 else -> {
                     binding.layoutMine.closeDrawers()
                     true
@@ -84,94 +85,8 @@ class MineFragment : Fragment() {
         }
     }
 
-    private fun showLogoutDialog() {
-        AlertDialog.Builder(requireContext())
-            .setTitle("尊敬的用户")
-            .setMessage("您要退出登录吗？")
-            .setPositiveButton("是") { _, _ -> logout() }
-            .setNegativeButton("否", null)
-            .create()
-            .show()
-    }
-
-    private fun logout() {
-
-    }
-
-    private fun getUserInfo() {
-
-    }
-
-    private fun refreshUserInfoToView() {
-//        val currentItem = binding.mineViewPager.currentItem
-//        userViewModel.getUserInfoFromNetwork(phone)
-//        initViewPager()
-//        binding.mineSwipeRefreshLayout.isRefreshing = false
-//        binding.mineViewPager.currentItem = currentItem
-    }
-
-    private fun setUserInfoToView(account: Account) {
-        account.background?.let {
-            Glide.with(requireContext()).load(it).into(binding.mineBackgroundImage)
-        }
-        account.avatar?.let {
-            Glide.with(requireContext()).load(it).into(binding.mineAvatar)
-        }
-        binding.mineIntroduction.text = account.introduction ?: ""
-        binding.mineNickname.text = account.nickname
-
-        setupImagePicker(account)
-    }
-
-    private fun setupImagePicker(account: Account) {
-        imageDealHelper.initImagePicker(
-            this,
-            onImageSelected = { _, _ -> },
-            onImageCropped = { uri, selectedTag ->
-                handleImageCrop(uri, selectedTag, account)
-            }
-        )
-
-        binding.mineBackgroundImage.setOnClickListener {
-            imageDealHelper.openGallery("backgroundImage")
-        }
-
-        binding.mineAvatar.setOnClickListener {
-            imageDealHelper.openGallery("avatar")
-        }
-    }
-
-    private fun handleImageCrop(uri: Uri, selectedTag: String, account: Account) {
-        when (selectedTag) {
-            "avatar" -> binding.mineAvatar.setImageURI(uri)
-            "backgroundImage" -> binding.mineBackgroundImage.setImageURI(uri)
-        }
-
-//        lifecycleScope.launch {
-//            withContext(Dispatchers.IO) {
-//                userViewModel.uploadImageToNetwork(requireContext(), uri, selectedTag, phone, null)
-//            }
-//        }
-//
-//        Handler(Looper.getMainLooper()).postDelayed({
-//            account.nickname?.let {
-//                userViewModel.updateUserInfoToRoom(
-//                    account.introduction,
-//                    account.birthday,
-//                    account.sex,
-//                    it,
-//                    account.career,
-//                    account.phone,
-//                    account.region,
-//                    account.school,
-//                    null
-//                )
-//            }
-//        }, 1000)
-    }
-
-    private fun toEditUserInfo() {
-        binding.mineEditUserInfo.setOnClickListener {
+    private fun toEditUserProfile() {
+        binding.mineEditUserProfile.setOnClickListener {
             val intent = Intent(requireContext(), UserProfileEdit::class.java)
             startActivity(intent)
         }
@@ -208,6 +123,82 @@ class MineFragment : Fragment() {
                     }
                 }
             })
+        }
+    }
+
+    private fun showLogoutDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("尊敬的用户")
+            .setMessage("您要退出登录吗？")
+            .setPositiveButton("是") { _, _ -> logout() }
+            .setNegativeButton("否", null)
+            .create()
+            .show()
+    }
+
+    private fun logout() {
+        viewModel.logout(account)
+    }
+
+    private fun getUserProFile() {
+        viewModel.userProfile.observe(viewLifecycleOwner) { it ->
+            it?.let {
+                setUI(it)
+                account = it
+            }
+        }
+        viewModel.getUserProfile(phone)
+    }
+
+    private fun refreshUserInfoToView() {
+        val currentItem = binding.mineViewPager.currentItem
+        viewModel.getUserProfile(phone)
+        binding.mineSwipeRefreshLayout.isRefreshing = false
+        binding.mineViewPager.currentItem = currentItem
+    }
+
+    private fun setUI(account: Account) {
+        account.background?.let {
+            Glide.with(requireContext()).load(it).into(binding.mineBackgroundImage)
+        }
+        account.avatar?.let {
+            Glide.with(requireContext()).load(it).into(binding.mineAvatar)
+        }
+        binding.mineIntroduction.text = account.introduction ?: ""
+        binding.mineNickname.text = account.nickname
+
+        setupImagePicker()
+    }
+
+    private fun setupImagePicker() {
+        imageDealHelper.initImagePicker(
+            this,
+            onImageSelected = { _, _ -> },
+            onImageCropped = { uri, selectedTag ->
+                handleImageCrop(uri, selectedTag)
+            }
+        )
+
+        binding.mineAvatar.setOnClickListener {
+            imageDealHelper.openGallery("avatar")
+        }
+
+        binding.mineBackgroundImage.setOnClickListener {
+            imageDealHelper.openGallery("backgroundImage")
+        }
+    }
+
+    private fun handleImageCrop(uri: Uri, selectedTag: String) {
+        when (selectedTag) {
+            "avatar" -> {
+                viewModel.updateUserAvatar(uri.toString(), phone)
+                binding.mineAvatar.setImageURI(uri)
+            }
+
+            "backgroundImage" -> {
+                viewModel.updateUserBackground(uri.toString(), phone)
+                binding.mineBackgroundImage.setImageURI(uri)
+            }
         }
     }
 
