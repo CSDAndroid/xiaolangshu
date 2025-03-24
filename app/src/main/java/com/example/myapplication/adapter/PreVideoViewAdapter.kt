@@ -35,10 +35,10 @@ class PreVideoViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val videoInfo = videoList[position]
         val imageTempUrl = videoInfo.image
-        val image = ImageDealHelper.convertToHttps(imageTempUrl)
+//        val image = ImageDealHelper.convertToHttps(imageTempUrl)
 
         Glide.with(holder.itemView.context)
-            .load(image)
+            .load(imageTempUrl)
             .into(holder.binding.PreVideoItemImg)
 
         Glide.with(holder.itemView.context)

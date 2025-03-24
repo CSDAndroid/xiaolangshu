@@ -52,9 +52,9 @@ class CommentAdapter(
                 Log.d("item", item.toString())
                 val videoHolder = holder as VideoViewHolder
                 val imageTempUrl = item.video.image
-                val image = ImageDealHelper.convertToHttps(imageTempUrl)
+//                val image = ImageDealHelper.convertToHttps(imageTempUrl)
 
-                Glide.with(videoHolder.itemView.context).load(image)
+                Glide.with(videoHolder.itemView.context).load(imageTempUrl)
                     .into(videoHolder.binding.PreVideoItemImg)
                 Glide.with(videoHolder.itemView.context).load(item.video.avatar)
                     .into(videoHolder.binding.PreVideoItemAvatar)
