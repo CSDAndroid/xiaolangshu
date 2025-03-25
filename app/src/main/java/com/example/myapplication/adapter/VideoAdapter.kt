@@ -14,12 +14,13 @@ import com.example.myapplication.databinding.VideoItemViewBinding
 import com.example.myapplication.lister.OnBackClickListener
 import com.example.myapplication.lister.OnCollectionLister
 import com.example.myapplication.lister.OnLikeLister
+import com.example.myapplication.mine.bean.VideoCardInfo
 
 open class VideoAdapter(
     private val onLikeLister: OnLikeLister,
     private val onCollectionLister: OnCollectionLister,
     private val onBackClickListener: OnBackClickListener,
-    private val videoList: List<VideoInfo>,
+    private val videoList: MutableList<VideoCardInfo>,
     private val phone: String
 ) :
     RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
@@ -123,4 +124,9 @@ open class VideoAdapter(
             likes.toString()
         }
     }
+//
+//    fun updateVideoList(videoList1: MutableList<VideoCardInfo>) {
+//        videoList.clear()
+//        videoList.addAll(videoList1)
+//    }
 }

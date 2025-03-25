@@ -1,12 +1,14 @@
 package com.example.myapplication.service.video.like
 
+import com.example.myapplication.mine.bean.VideoCardInfo
+
 interface VideoLikeProcessor {
 
-    fun init()
+    suspend fun init(phone: String, i: Int): List<VideoCardInfo>
 
-    fun isLike()
+    fun isLike(videoCardInfo: VideoCardInfo): Boolean
 
     fun updateLikeList()
 
-    suspend fun like()
+    suspend fun like(videoCardInfo: VideoCardInfo): Boolean
 }

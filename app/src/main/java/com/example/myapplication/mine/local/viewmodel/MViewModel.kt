@@ -28,25 +28,65 @@ class MViewModel(
     private val _videoPostListLiveData = MutableLiveData<List<VideoCardInfo>?>()
     val videoPostList: MutableLiveData<List<VideoCardInfo>?> get() = _videoPostListLiveData
 
+    private val isLoading: MutableList<Boolean> = mutableListOf(false,false,false)
+    private val isLastPage: MutableList<Boolean> = mutableListOf(false,false,false)
+    private val currentPage: MutableList<Int> = mutableListOf(0,0,0)
+
     fun getPhone(): String? {
         return userService.getPhone()
     }
 
     fun getVideoLikeList(phone: String) {
+        if (isLoading[0] || isLastPage[0]) return
+
+        isLoading[0] = true
         viewModelScope.launch {
-            videoLikeProcessor.init()
+            val newVideo = videoLikeProcessor.init(phone, currentPage[0])
+            if (newVideo.isEmpty()) {
+                isLastPage[0] = true
+            } else {
+                _videoLikeListLiveData.postValue(videoLikeList.value.orEmpty() + newVideo)
+                currentPage[0] += 1
+            }
+            isLoading[0] = false
         }
     }
 
     fun getVideoCollectList(phone: String) {
+        if (isLoading[1] || isLastPage[1]) return
+
+        isLoading[1] = true
         viewModelScope.launch {
-            videoCollectProcessor.init()
+            val newVideo = videoCollectProcessor.init(phone, currentPage)
+            if (newVideo.isEmpty()) {
+                isLastPage[1] = true
+            } else {
+                _videoCollectionListLiveData.postValue(videoCollectList.value.orEmpty() + newVideo)
+                currentPage[1] += 1
+            }
+           isLoading[1] = false
         }
     }
 
     fun getVideoPostList(phone: String) {
+        if (isLoading[2] || isLastPage[2]) return
+
+        isLoading[2] = true
         viewModelScope.launch {
-            videoPostProcessor.init()
+            val newVideos = videoPostProcessor.init(phone, currentPage)
+            if (newVideos.isEmpty()) {
+                isLastPage[2] = true
+            } else {
+                _videoPostListLiveData.postValue(videoPostList.value.orEmpty() + newVideos)
+                currentPage[2] += 1
+            }
+           isLoading[2] = true
+        }
+    }
+
+    fun like(videoCardInfo: VideoCardInfo) {
+        viewModelScope.launch {
+
         }
     }
 

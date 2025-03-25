@@ -1,15 +1,17 @@
 package com.example.myapplication.service.video.collect
 
+import com.example.myapplication.mine.bean.VideoCardInfo
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class VideoCollectProcessorImpl @Inject constructor(): VideoCollectProcessor {
-    override fun init() {
+
+    override suspend fun init(phone: String, currentPage: MutableList<Int>): List<VideoCardInfo> {
         TODO("Not yet implemented")
     }
 
-    override fun isCollection() {
+    override fun isCollection(videoCardInfo: VideoCardInfo): Boolean {
         TODO("Not yet implemented")
     }
 
@@ -17,7 +19,7 @@ class VideoCollectProcessorImpl @Inject constructor(): VideoCollectProcessor {
         TODO("Not yet implemented")
     }
 
-    override suspend fun collect() {
+    override suspend fun collect(videoCardInfo: VideoCardInfo): Boolean {
         TODO("Not yet implemented")
     }
 }

@@ -1,12 +1,14 @@
 package com.example.myapplication.service.video.collect
 
+import com.example.myapplication.mine.bean.VideoCardInfo
+
 interface VideoCollectProcessor {
 
-    fun init()
+    suspend fun init(phone: String, currentPage: MutableList<Int>): List<VideoCardInfo>
 
-    fun isCollection()
+    fun isCollection(videoCardInfo: VideoCardInfo): Boolean
 
     fun updateCollectionList()
 
-    suspend fun collect()
+    suspend fun collect(videoCardInfo: VideoCardInfo): Boolean
 }
