@@ -1,16 +1,18 @@
 package com.example.myapplication.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myapplication.R
 import com.example.myapplication.databinding.PreVideoItemViewBinding
 import com.example.myapplication.mine.bean.VideoCardInfo
 
 class PreVideoViewAdapter(
-    private val videoList: MutableList<VideoCardInfo>,
+    private val onclickLike: (VideoCardInfo, Int) -> Unit
 ) : RecyclerView.Adapter<PreVideoViewAdapter.ViewHolder>() {
+
+    private val videoList: MutableList<VideoCardInfo> = mutableListOf()
 
     inner class ViewHolder(val binding: PreVideoItemViewBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -35,28 +37,10 @@ class PreVideoViewAdapter(
         holder.binding.PreVideoItemNickname.text = videoInfo.nickname
         holder.binding.PreVideoItemDescription.text = videoInfo.description
         holder.binding.PreVideoItemIsLoveNumber.text = formatLikes(videoInfo.like)
-
-//        val isLiked = onLikeLister.isLike(videoInfo, phone)
-//        holder.binding.PreVideoItemIsLove.setImageResource(if (isLiked) R.drawable.love4 else R.drawable.love3)
-//
-//        holder.binding.PreVideoItemIsLove.setOnClickListener {
-//            onLikeLister.onLike(phone, videoInfo)
-//            if (isLiked) {
-//                holder.binding.PreVideoItemIsLove.setImageResource(R.drawable.love3)
-//                videoInfo.like -= 1
-//            } else {
-//                holder.binding.PreVideoItemIsLove.setImageResource(R.drawable.love4)
-//                videoInfo.like += 1
-//            }
-//            notifyItemChanged(position)
-//        }
-//
-//        holder.binding.PreVideoItemImg.setOnClickListener {
-//            val intent = Intent(holder.itemView.context, Video::class.java)
-//            intent.putExtra("videoInfo", videoList[position])
-//            intent.putExtra("tag", tag)
-//            holder.itemView.context.startActivities(arrayOf(intent))
-//        }
+        holder.binding.PreVideoItemIsLove.setImageResource(if (videoInfo.isLike) R.drawable.love4 else R.drawable.love3)
+        holder.binding.PreVideoItemIsLove.setOnClickListener {
+            onclickLike(videoInfo, position)
+        }
     }
 
     override fun getItemCount(): Int = videoList.size
@@ -69,8 +53,7 @@ class PreVideoViewAdapter(
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateVideoList(newVideos: List<VideoCardInfo>) {
+    fun addVideoList(newVideos: List<VideoCardInfo>) {
         val uniqueNewVideos = newVideos.filterNot { newVideo ->
             videoList.any { existingVideo -> existingVideo.aid == newVideo.aid }
         }

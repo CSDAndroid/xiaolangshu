@@ -10,14 +10,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.adapter.PreVideoViewAdapter
 import com.example.myapplication.databinding.MineCollectionPagerBinding
-import com.example.myapplication.lister.OnLikeLister
 import com.example.myapplication.mine.bean.VideoCardInfo
 import com.example.myapplication.mine.local.viewmodel.MViewModel
 import com.example.myapplication.util.SpaceItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MineCollectionFragment : Fragment(), OnLikeLister {
+class MineCollectionFragment : Fragment() {
 
     private var _binding: MineCollectionPagerBinding? = null
     private val binding get() = _binding!!
@@ -28,7 +27,9 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
     private val videoLikeList: MutableList<VideoCardInfo> = mutableListOf()
     private val videoCollectList: MutableList<VideoCardInfo> = mutableListOf()
 
-    private val mAdapter: PreVideoViewAdapter = PreVideoViewAdapter(mutableListOf())
+    private val mAdapter: PreVideoViewAdapter = PreVideoViewAdapter {video, position ->
+        toggleLike(video, position)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,7 +71,7 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
 
             videoCollectList.observe(viewLifecycleOwner) {
                 it?.let {
-                    mAdapter.updateVideoList(it)
+                    mAdapter.addVideoList(it)
                     isLoading = false
                     updateCollectList(it)
                 }
@@ -99,16 +100,23 @@ class MineCollectionFragment : Fragment(), OnLikeLister {
         }
     }
 
+    private fun toggleLike(video: VideoCardInfo, position: Int) {
+        val newStatus = !video.isLike
+        val newLikeNumber = video.like + if (newStatus) + 1 else - 1
+        val newVideo = video.copy(isLike = newStatus, like = newLikeNumber)
+        viewModel.updateCollectVideo(newVideo)
+        mAdapter.notifyItemChanged(position)
+
+        viewModel.toggleLike(video) { success ->
+            if (!success) {
+                viewModel.updateCollectVideo(video)
+                mAdapter.notifyItemChanged(position)
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onLike(phone: String, videoInfo: VideoCardInfo) {
-        TODO("Not yet implemented")
-    }
-
-    override fun isLike(videoInfo: VideoCardInfo, phone: String): Boolean {
-        TODO("Not yet implemented")
     }
 }

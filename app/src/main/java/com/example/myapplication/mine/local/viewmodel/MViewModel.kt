@@ -10,6 +10,7 @@ import com.example.myapplication.service.video.like.VideoLikeProcessor
 import com.example.myapplication.service.video.post.VideoPostProcessor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.internal.toImmutableList
 
 @HiltViewModel
 class MViewModel(
@@ -84,9 +85,18 @@ class MViewModel(
         }
     }
 
-    fun like(videoCardInfo: VideoCardInfo) {
+    fun toggleLike(video: VideoCardInfo, callback: (Boolean) -> Unit) {
         viewModelScope.launch {
+            val status = videoLikeProcessor.toggleLike(video)
+            callback(status)
+        }
+    }
 
+    fun updateCollectVideo(video: VideoCardInfo) {
+        val currentVideoList = _videoCollectionListLiveData.value ?.toMutableList() ?: return
+        currentVideoList.indexOfFirst { it.aid == video.aid }.takeIf { it != -1 } ?.let { index ->
+            currentVideoList[index] = video
+            _videoCollectionListLiveData.value = currentVideoList
         }
     }
 

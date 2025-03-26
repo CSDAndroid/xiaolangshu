@@ -11,4 +11,6 @@ data class VideoCardInfo(
     var collection: Int,
     val nickname: String,
     val description: String,
+    var isLike: Boolean,
+    var isCollect: Boolean
 ): Serializable

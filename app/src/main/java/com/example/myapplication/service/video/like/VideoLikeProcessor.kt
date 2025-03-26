@@ -10,5 +10,5 @@ interface VideoLikeProcessor {
 
     fun updateLikeList()
 
-    suspend fun like(videoCardInfo: VideoCardInfo): Boolean
+    suspend fun toggleLike(videoCardInfo: VideoCardInfo): Boolean
 }

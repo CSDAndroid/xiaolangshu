@@ -18,7 +18,7 @@ class VideoLikeProcessorImpl @Inject constructor(): VideoLikeProcessor {
         TODO("Not yet implemented")
     }
 
-    override suspend fun like(videoCardInfo: VideoCardInfo): Boolean {
+    override suspend fun toggleLike(videoCardInfo: VideoCardInfo): Boolean {
         TODO("Not yet implemented")
     }
 }
