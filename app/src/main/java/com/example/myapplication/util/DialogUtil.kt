@@ -15,7 +15,7 @@ import android.widget.ImageView
 import androidx.fragment.app.DialogFragment
 import com.example.myapplication.R
 
-class DialogUtil() : DialogFragment() {
+class DialogUtil : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)

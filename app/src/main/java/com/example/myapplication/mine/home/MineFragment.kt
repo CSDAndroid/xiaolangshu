@@ -14,12 +14,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.account.userProfile.UserProfileEdit
-import com.example.myapplication.adapter.MAdapter
+import com.example.myapplication.common.adapter.MAdapter
 import com.example.myapplication.databinding.MinePagerBinding
-import com.example.myapplication.mine.local.MineCollectionFragment
-import com.example.myapplication.mine.local.MineLoveFragment
-import com.example.myapplication.mine.local.MineWorkFragment
-import com.example.myapplication.share.Load
+import com.example.myapplication.mine.page.MineCollectionFragment
+import com.example.myapplication.mine.page.MineLoveFragment
+import com.example.myapplication.mine.page.MineWorkFragment
+import com.example.myapplication.post.Load
 import com.example.myapplication.storage.db.entity.Account
 import com.example.myapplication.util.ImageDealHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +38,6 @@ class MineFragment : Fragment() {
     private val phone: String by lazy { viewModel.getPhone() ?: "" }
 
     private lateinit var fragments: List<Fragment>
-    private lateinit var account: Account
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -137,15 +136,12 @@ class MineFragment : Fragment() {
     }
 
     private fun logout() {
-        viewModel.logout(account)
+        viewModel.logout()
     }
 
     private fun getUserProFile() {
         viewModel.userProfile.observe(viewLifecycleOwner) { it ->
-            it?.let {
-                setUI(it)
-                account = it
-            }
+            it?.let { setUI(it) }
         }
         viewModel.getUserProfile(phone)
     }

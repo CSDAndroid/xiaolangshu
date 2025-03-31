@@ -21,7 +21,6 @@ class ImageDownloader {
     private var currentFile: File? = null
 
     fun startDownload(context: Context, url: String, callBack: ImageDownLoadCallBack) {
-
         if (!isNetworkAvailable(context)) {
             callBack.onDownLoadFailed("没有网络连接")
             return

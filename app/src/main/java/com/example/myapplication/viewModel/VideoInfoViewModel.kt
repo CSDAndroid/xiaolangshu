@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.data.VideoInfo
+import com.example.myapplication.common.bean.VideoInfo
 import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.http.HttpInterface
 import com.example.myapplication.http.HttpService
@@ -162,7 +162,7 @@ class VideoInfoViewModel(private val context: Context, private val database: App
         }
     }
 
-    fun setTheVideoToCollection(videoInfo: VideoInfo,phone: String) {
+    fun setTheVideoToCollection(videoInfo: VideoInfo, phone: String) {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
                 database.accountOtherDao().getCollectionList(phone)
@@ -209,7 +209,7 @@ class VideoInfoViewModel(private val context: Context, private val database: App
         }
     }
 
-    fun setTheVideoToWork(videoInfo: VideoInfo,phone: String) {
+    fun setTheVideoToWork(videoInfo: VideoInfo, phone: String) {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
                 database.accountOtherDao().getWorkList(phone)

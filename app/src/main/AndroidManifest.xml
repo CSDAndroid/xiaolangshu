@@ -20,27 +20,24 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="fullSensor" />
         <activity
-            android:name=".share.Load"
+            android:name=".post.Load"
             android:exported="false" />
         <activity
-            android:name=".share.DeleteLoad"
+            android:name=".post.DeleteLoad"
             android:exported="false" />
         <activity
-            android:name=".picture.PictureLoad"
+            android:name=".search.page.AfterSearch"
             android:exported="false" />
         <activity
-            android:name=".search.AfterSearch"
-            android:exported="false" />
-        <activity
-            android:name=".video.Video"
+            android:name=".common.video.Video"
             android:enableOnBackInvokedCallback="true"
             android:exported="false"
             tools:targetApi="tiramisu" />
         <activity
-            android:name=".search.Search"
+            android:name=".search.page.Search"
             android:exported="false" />
         <activity
-            android:name=".account.userProfile.UserInfoEdit"
+            android:name=".account.userProfile.UserProfileEdit"
             android:exported="false" />
         <activity
             android:name=".account.op.OP"

@@ -37,11 +37,13 @@ class UserServiceImpl @Inject constructor(
         return result.isSuccessful && status != -1L
     }
 
-    override suspend fun logout(account: Account): Boolean {
-        val status = appDatabase.accountDao().delete(account)
-        preferencesManager.clearPhone()
-
-        return status != 0
+    override suspend fun logout(): Boolean {
+        val account = appDatabase.accountDao().getAccount(getPhone() ?: "")
+        return run {
+            val status = appDatabase.accountDao().delete(account)
+            preferencesManager.clearPhone()
+            status != 0
+        }
     }
 
     override suspend fun sendVerificationCode(phone: String, nickname: String): String {

@@ -24,9 +24,9 @@ class MineViewModel @Inject constructor(
         return userService.getPhone()
     }
 
-    fun logout(account: Account) {
+    fun logout() {
         viewModelScope.launch {
-            userService.logout(account)
+            userService.logout()
         }
     }
 
@@ -44,14 +44,22 @@ class MineViewModel @Inject constructor(
 
     fun updateUserAvatar(avatar: String, phone: String) {
         viewModelScope.launch {
-            appDatabase.accountDao().updateAvatar(avatar, phone)
+            try {
+                appDatabase.accountDao().updateAvatar(avatar, phone)
+            } catch (e: Exception) {
+                Log.e("头像更新", e.message.toString())
+            }
+
         }
     }
 
     fun updateUserBackground(background: String, phone: String) {
         viewModelScope.launch {
-            appDatabase.accountDao().updateBackground(background, phone)
+            try {
+                appDatabase.accountDao().updateBackground(background, phone)
+            } catch (e: Exception) {
+                Log.e("背景更新", e.message.toString())
+            }
         }
     }
-
 }

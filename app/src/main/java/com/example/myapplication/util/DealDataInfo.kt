@@ -1,9 +1,9 @@
 package com.example.myapplication.util
 
-import com.example.myapplication.data.VideoInfo
-import com.example.myapplication.data.randomVideoData.VideoResponse
-import com.example.myapplication.data.searchVideoData.VideoBySearch
-import com.example.myapplication.data.userData.UserResponseData
+import com.example.myapplication.common.bean.VideoInfo
+import com.example.myapplication.search.bean.bilibili.VideoBySearch
+import com.example.myapplication.common.bean.UserResponseData
+import com.example.myapplication.home.bean.bilibili.VideoProfile
 import com.example.myapplication.storage.db.entity.Account
 
 object DealDataInfo {
@@ -26,7 +26,7 @@ object DealDataInfo {
     fun <T> dealVideoInfo(videos: List<T>): List<VideoInfo> {
         return videos.map { video ->
             when (video) {
-                is VideoResponse -> VideoInfo(
+                is VideoProfile -> VideoInfo(
                     aid = video.id,
                     cid = video.cid,
                     like = video.stat.like,

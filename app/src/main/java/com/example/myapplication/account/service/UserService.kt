@@ -12,7 +12,7 @@ interface UserService {
 
     suspend fun login(loginRequest: LoginRequest): Boolean
 
-    suspend fun logout(account: Account): Boolean
+    suspend fun logout(): Boolean
 
     suspend fun register(registerRequest: RegisterRequest): Boolean
 

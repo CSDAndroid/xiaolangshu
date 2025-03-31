@@ -13,12 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.account.op.OP
 import com.example.myapplication.account.service.UserService
-import com.example.myapplication.adapter.MAdapter
+import com.example.myapplication.common.adapter.MAdapter
 import com.example.myapplication.databinding.ActivityMainBinding
-import com.example.myapplication.mainFragment.MainFragment
-import com.example.myapplication.messageFragment.MessageFragment
+import com.example.myapplication.home.home.MainFragment
 import com.example.myapplication.mine.home.MineFragment
-import com.example.myapplication.pictureFragment.PictureFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -42,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             requestPermissions()
         }
 
-//        judgeIsLogin()
+        judgeIsLogin()
         initViewPager()
         initRadioGroup()
     }
@@ -57,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViewPager() {
         binding.mainViewPager.run {
-            fragments = listOf(MainFragment(), PictureFragment(), MessageFragment(), MineFragment())
+            fragments = listOf(MainFragment(), MineFragment())
             adapter = MAdapter(supportFragmentManager, lifecycle, fragments)
             isUserInputEnabled = false
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
