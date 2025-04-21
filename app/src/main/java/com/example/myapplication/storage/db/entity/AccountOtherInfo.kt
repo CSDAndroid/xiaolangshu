@@ -17,7 +17,7 @@ data class AccountOtherInfo (
     val id: Int,
 
     @ColumnInfo(name = "_phone")
-    val phone: Int,
+    val phone: String,
 
     @ColumnInfo(name = "focus_number")
     val fn: Int? = 0,

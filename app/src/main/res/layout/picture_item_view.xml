@@ -64,7 +64,7 @@
                     android:layout_height="35dp"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/shape4"
+                    android:background="@drawable/shape2"
                     android:gravity="center"
                     android:padding="4dp"
                     android:text="关注"
@@ -93,7 +93,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
-                        android:src="@drawable/love2" />
+                        android:src="@drawable/like_icon1" />
 
                     <TextView
                         android:id="@+id/picture_item_love_number"
@@ -122,7 +122,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
-                        android:src="@drawable/collection" />
+                        android:src="@drawable/collection_icon" />
 
                     <TextView
                         android:id="@+id/picture_item_collection_number"
@@ -152,7 +152,7 @@
             android:id="@+id/picture_item_back"
             android:layout_width="50dp"
             android:layout_height="60dp"
-            android:src="@drawable/_chevron_left4"
+            android:src="@drawable/_chevron_left2"
             android:background="@android:color/transparent"/>
 
     </LinearLayout>

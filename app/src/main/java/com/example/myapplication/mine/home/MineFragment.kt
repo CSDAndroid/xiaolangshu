@@ -1,6 +1,7 @@
 package com.example.myapplication.mine.home
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +20,6 @@ import com.example.myapplication.databinding.MinePagerBinding
 import com.example.myapplication.mine.page.MineCollectionFragment
 import com.example.myapplication.mine.page.MineLoveFragment
 import com.example.myapplication.mine.page.MineWorkFragment
-import com.example.myapplication.post.Load
 import com.example.myapplication.storage.db.entity.Account
 import com.example.myapplication.util.ImageDealHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +50,9 @@ class MineFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().window.statusBarColor = Color.parseColor("#333232")
+
         initSwipeRefreshLayout()
         initNavigationView()
         toEditUserProfile()
@@ -93,8 +96,6 @@ class MineFragment : Fragment() {
 
     private fun toLoadWork() {
         binding.mineMakeVideo.setOnClickListener {
-            val intent = Intent(requireContext(), Load::class.java)
-            startActivity(intent)
         }
     }
 

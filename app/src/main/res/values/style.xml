@@ -1,5 +1,4 @@
 <resources>
-
     <style name="RadioGroupButtonStyle">
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
@@ -22,4 +21,7 @@
         <item name="android:padding">10dp</item>
     </style>
 
+    <style name="NoMaterialButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@null</item>
+    </style>
 </resources>

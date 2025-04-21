@@ -10,5 +10,5 @@ interface VideoCollectProcessor {
 
     fun updateCollectionList()
 
-    suspend fun collect(videoCardInfo: VideoCardInfo): Boolean
+    suspend fun toggleCollect(videoCardInfo: VideoCardInfo): Boolean
 }

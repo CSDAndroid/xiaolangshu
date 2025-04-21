@@ -15,22 +15,13 @@
             android:id="@+id/log_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
             android:minHeight="?attr/actionBarSize"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            app:navigationIcon="@drawable/_chevron_left2"
+            app:navigationIcon="@drawable/_chevron_left1"
             app:navigationIconTint="@color/md_theme_onSurface" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <!--    <ImageButton-->
-    <!--        android:id="@+id/log_back"-->
-    <!--        android:layout_width="50dp"-->
-    <!--        android:layout_height="50dp"-->
-    <!--        android:layout_marginEnd="160dp"-->
-    <!--        android:background="@android:color/transparent"-->
-    <!--        android:src="@drawable/_chevron_left2" />-->
 
     <TextView
         android:layout_width="match_parent"
@@ -56,7 +47,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:autofillHints="phone"
-            android:background="@drawable/shape2"
+            android:background="@drawable/shape1"
             android:hint="请输入手机号"
             android:inputType="phone"
             android:maxLength="11"
@@ -72,7 +63,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:autofillHints="password"
-            android:background="@drawable/shape2"
+            android:background="@drawable/shape1"
             android:hint="请输入密码"
             android:inputType="textPassword"
             android:maxLength="20"
@@ -80,51 +71,19 @@
             android:textColor="@color/md_theme_onSurfaceVariant"
             android:textColorHint="@color/md_theme_outline" />
 
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="25dp"-->
-        <!--            android:orientation="horizontal">-->
-
-        <!--            <EditText-->
-        <!--                android:id="@+id/log_code"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center_vertical"-->
-        <!--                android:layout_marginStart="15dp"-->
-        <!--                android:layout_marginEnd="15dp"-->
-        <!--                android:layout_weight="4"-->
-        <!--                android:background="@drawable/shape2"-->
-        <!--                android:hint="请输入验证码"-->
-        <!--                android:inputType="number"-->
-        <!--                android:padding="10dp"-->
-        <!--                android:textColorHint="#ACA8A8" />-->
-
-        <!--            <Button-->
-        <!--                android:id="@+id/log_requestCode"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center_vertical"-->
-        <!--                android:layout_marginStart="15dp"-->
-        <!--                android:layout_marginEnd="15dp"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:background="@drawable/shape3"-->
-        <!--                android:gravity="center"-->
-        <!--                android:text="获取验证码" />-->
-
-        <!--        </LinearLayout>-->
-
         <Button
             android:id="@+id/log_button"
+            style="@style/NoMaterialButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/shape4"
+            android:background="@drawable/shape3"
+            android:elevation="4dp"
             android:gravity="center"
             android:text="登录"
-            android:textColor="@color/md_theme_primary"
+            android:textColor="@color/md_theme_onBackground"
             android:textSize="18sp" />
 
     </LinearLayout>

@@ -7,14 +7,19 @@ import com.example.myapplication.http.HttpService
 import com.example.myapplication.storage.db.AppDatabase
 import com.example.myapplication.storage.db.entity.Account
 import com.example.myapplication.storage.preference.PreferencesManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Provider
 import javax.inject.Singleton
 
+// 有时间来处理这里的协程上下文的问题
 @Singleton
 class UserServiceImpl @Inject constructor(
     private val appDatabase: AppDatabase,
-    private val preferencesManager: PreferencesManager
+    private val preferencesManagerProvider: Provider<PreferencesManager>
 ) : UserService {
+    private val preferencesManager by lazy { preferencesManagerProvider.get() }
     private val address: String = "http://8.138.41.189:8085/"
     private val accountApiService: AccountApi by lazy {
         HttpService.sendHttp(address, AccountApi::class.java)
@@ -61,7 +66,9 @@ class UserServiceImpl @Inject constructor(
     }
 
     override suspend fun getUserProfile(phone: String): Account {
-        return appDatabase.accountDao().getAccount(phone)
+        return withContext(Dispatchers.IO) {
+            appDatabase.accountDao().getAccount(phone)
+        }
     }
 
     override suspend fun updateUserProfile(account: Account): Boolean {

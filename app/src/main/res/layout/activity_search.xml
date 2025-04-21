@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_theme_surface"
+    android:background="@color/md_theme_surfaceContainer"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal">
+        android:background="@color/md_theme_surface"
+        android:elevation="2dp">
 
         <ImageButton
             android:id="@+id/search_back"
@@ -17,7 +18,7 @@
             android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/_chevron_left2" />
+            android:src="@drawable/_chevron_left1" />
 
         <EditText
             android:id="@+id/search_comment"
@@ -27,10 +28,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="1dp"
             android:layout_weight="9"
-            android:background="@drawable/shape2"
-            android:drawableStart="@drawable/magnifyingglass4"
+            android:background="@drawable/shape1"
+            android:drawableStart="@drawable/search_icon2"
             android:drawablePadding="8dp"
-            android:drawableTint="@color/md_theme_onSurfaceVariant_mediumContrast"
             android:gravity="center_vertical"
             android:padding="5dp"
             android:textColor="@color/md_theme_primary"
@@ -47,11 +47,6 @@
             android:textColor="@color/md_theme_onSurfaceVariant_mediumContrast" />
 
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/md_theme_outline" />
 
     <TextView
         android:layout_width="wrap_content"

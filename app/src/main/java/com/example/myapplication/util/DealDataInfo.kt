@@ -1,8 +1,8 @@
 package com.example.myapplication.util
 
-import com.example.myapplication.common.bean.VideoInfo
 import com.example.myapplication.search.bean.bilibili.VideoBySearch
 import com.example.myapplication.common.bean.UserResponseData
+import com.example.myapplication.common.bean.VideoCardInfo
 import com.example.myapplication.home.bean.bilibili.VideoProfile
 import com.example.myapplication.storage.db.entity.Account
 
@@ -23,10 +23,10 @@ object DealDataInfo {
             region, school, backgroundImage)
     }
 
-    fun <T> dealVideoInfo(videos: List<T>): List<VideoInfo> {
+    fun <T> dealVideoInfo(videos: List<T>): List<VideoCardInfo> {
         return videos.map { video ->
             when (video) {
-                is VideoProfile -> VideoInfo(
+                is VideoProfile -> VideoCardInfo(
                     aid = video.id,
                     cid = video.cid,
                     like = video.stat.like,
@@ -34,10 +34,12 @@ object DealDataInfo {
                     avatar = video.owner.face,
                     collection = video.stat.view,
                     nickname = video.owner.name,
-                    description = video.title
+                    description = video.title,
+                    isLike = false,
+                    isCollect = false
                 )
 
-                is VideoBySearch -> VideoInfo(
+                is VideoBySearch -> VideoCardInfo(
                     aid = video.aid ?: 0,
                     cid = video.id ?: 0,
                     like = video.like ?: 0,
@@ -45,10 +47,12 @@ object DealDataInfo {
                     avatar = video.upic ?: "",
                     collection = video.favorites ?: 0,
                     nickname = video.author ?: "",
-                    description = video.description ?: ""
+                    description = video.description ?: "",
+                    isLike = false,
+                    isCollect = false
                 )
 
-                else -> VideoInfo(0, 0, 0, "", "", 0, "", "")
+                else -> VideoCardInfo(0, 0, 0, "", "", 0, "", "", isLike = false, isCollect = false)
             }
         }
     }

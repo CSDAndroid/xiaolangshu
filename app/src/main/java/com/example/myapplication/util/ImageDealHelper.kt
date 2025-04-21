@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import com.yalantis.ucrop.UCrop
+import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.scopes.ActivityScoped
 import java.io.File
 import java.io.FileOutputStream
@@ -19,7 +20,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 @ActivityScoped
-class ImageDealHelper @Inject constructor(private val context: Context) {
+class ImageDealHelper @Inject constructor(@ActivityContext private val context: Context) {
     private lateinit var getContentLauncher: ActivityResultLauncher<String>
     private lateinit var cropImageLauncher: ActivityResultLauncher<Intent>
     private var selectedTag: String? = null
@@ -118,11 +119,5 @@ class ImageDealHelper @Inject constructor(private val context: Context) {
             "png" -> "image/png"
             else -> "application/octet-stream"
         }
-    }
-
-    fun convertToHttps(url: String?): String? {
-        return if (url != null && url.startsWith("http://")) {
-            url.replace("http://", "https://")
-        } else url
     }
 }

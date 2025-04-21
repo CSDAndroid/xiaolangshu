@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.common.adapter.PreVideoViewAdapter
-import com.example.myapplication.databinding.MineCollectionPagerBinding
 import com.example.myapplication.common.bean.VideoCardInfo
+import com.example.myapplication.databinding.MineCollectionPagerBinding
 import com.example.myapplication.mine.page.viewmodel.MViewModel
 import com.example.myapplication.util.SpaceItem
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,12 +24,8 @@ class MineCollectionFragment : Fragment() {
 
     private var isLoading: Boolean = false
     private val phone by lazy { viewModel.getPhone() ?: "" }
-    private val videoLikeList: MutableList<VideoCardInfo> = mutableListOf()
-    private val videoCollectList: MutableList<VideoCardInfo> = mutableListOf()
 
-    private val mAdapter: PreVideoViewAdapter = PreVideoViewAdapter { video, position ->
-        toggleLike(video, position)
-    }
+    private val mAdapter: PreVideoViewAdapter = PreVideoViewAdapter { video -> toggleLike(video) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,53 +60,27 @@ class MineCollectionFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.apply {
-            videoLikeList.observe(viewLifecycleOwner) {
-                it?.let { updateLikeList(it) }
-            }
-
-            videoCollectList.observe(viewLifecycleOwner) {
-                it?.let {
-                    mAdapter.addVideoList(it)
-                    isLoading = false
-                    updateCollectList(it)
-                }
+        viewModel.videoCollectList.observe(viewLifecycleOwner) {
+            it?.let {
+                mAdapter.addVideoList(it)
+                isLoading = false
             }
         }
 
-        viewModel.getVideoLikeList(phone)
         viewModel.getVideoCollectList(phone)
     }
 
-    private fun updateLikeList(likeList: List<VideoCardInfo>) {
-        videoLikeList.clear()
-        videoLikeList.addAll(likeList)
-    }
-
-    private fun updateCollectList(collectList: List<VideoCardInfo>) {
-        if (videoCollectList.isEmpty()) {
-            videoCollectList.addAll(collectList)
-        } else {
-            val exists = videoCollectList.toSet()
-            val newItems = collectList.filterNot { exists.contains(it) }
-
-            if (newItems.isNotEmpty()) {
-                videoCollectList.addAll(newItems)
-            }
-        }
-    }
-
-    private fun toggleLike(video: VideoCardInfo, position: Int) {
+    private fun toggleLike(video: VideoCardInfo) {
         val newStatus = !video.isLike
-        val newLikeNumber = video.like + if (newStatus) + 1 else - 1
+        val newLikeNumber = video.like + if (newStatus) +1 else -1
         val newVideo = video.copy(isLike = newStatus, like = newLikeNumber)
+        mAdapter.updateVideoList(newVideo)
         viewModel.updateCollectVideo(newVideo)
-        mAdapter.notifyItemChanged(position)
 
         viewModel.toggleLike(video) { success ->
             if (!success) {
+                mAdapter.updateVideoList(video)
                 viewModel.updateCollectVideo(video)
-                mAdapter.notifyItemChanged(position)
             }
         }
     }

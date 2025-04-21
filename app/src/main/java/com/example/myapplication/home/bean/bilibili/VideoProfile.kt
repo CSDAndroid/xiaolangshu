@@ -1,5 +1,9 @@
 package com.example.myapplication.home.bean.bilibili
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class VideoProfile(
     val id: Long,
     val bvid: String,
@@ -19,12 +23,12 @@ data class VideoProfile(
     val show_info: Int,
     val track_id: String?,
     val pos: Int,
-    val room_info: Any?,
-    val ogv_info: Any?,
-    val business_info: Any?,
+    val room_info: String?,
+    val ogv_info: String?,
+    val business_info: String?,
     val is_stock: Int,
     val enable_vt: Int,
     val vt_display: String?,
     val dislike_switch: Int,
     val dislike_switch_pc: Int
-)
+) : Parcelable

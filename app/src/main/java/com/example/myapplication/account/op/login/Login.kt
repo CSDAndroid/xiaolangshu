@@ -11,7 +11,9 @@ import com.example.myapplication.MainActivity
 import com.example.myapplication.account.bean.LoginRequest
 import com.example.myapplication.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class Login : AppCompatActivity(), View.OnClickListener {
@@ -46,8 +48,10 @@ class Login : AppCompatActivity(), View.OnClickListener {
             lifecycleScope.launch {
                 try {
                     val loginRequest = LoginRequest(telephone, pwd)
-
-                    if (viewModel.login(loginRequest)) {
+                    val result = withContext(Dispatchers.IO) {
+                        viewModel.login(loginRequest)
+                    }
+                    if (result) {
                         Toast.makeText(this@Login, "登录成功", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@Login, MainActivity::class.java)
                         startActivity(intent)

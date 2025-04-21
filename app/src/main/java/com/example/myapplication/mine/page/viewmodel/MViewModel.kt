@@ -92,6 +92,14 @@ class MViewModel @Inject constructor(
         }
     }
 
+    fun updateLikeVideo(video: VideoCardInfo) {
+        val currentVideoList = _videoLikeListLiveData.value?.toMutableList() ?: return
+        currentVideoList.indexOfFirst { it.aid == video.aid }.takeIf { it != -1 }?.let { index ->
+            currentVideoList[index] = video
+            _videoLikeListLiveData.value = currentVideoList
+        }
+    }
+
     fun updateCollectVideo(video: VideoCardInfo) {
         val currentVideoList = _videoCollectionListLiveData.value?.toMutableList() ?: return
         currentVideoList.indexOfFirst { it.aid == video.aid }.takeIf { it != -1 }?.let { index ->
@@ -107,13 +115,4 @@ class MViewModel @Inject constructor(
             _videoPostListLiveData.value = currentVideoList
         }
     }
-
-    fun updateLikeVideo(video: VideoCardInfo) {
-        val currentVideoList = _videoLikeListLiveData.value?.toMutableList() ?: return
-        currentVideoList.indexOfFirst { it.aid == video.aid }.takeIf { it != -1 }?.let { index ->
-            currentVideoList[index] = video
-            _videoLikeListLiveData.value = currentVideoList
-        }
-    }
-
 }

@@ -1,9 +1,11 @@
 package com.example.myapplication.home.bean.bilibili
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Owner(
     val mid: Long,
     val name: String,
     val face: String
-) : Serializable
+) : Parcelable

@@ -1,7 +1,9 @@
 package com.example.myapplication.search.bean.bilibili
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class VideoBySearch(
     val type: String?,
     val id: Long?,
@@ -29,8 +31,8 @@ data class VideoBySearch(
     val view_type: String?,
     val is_pay: Int?,
     val is_union_video: Int?,
-    val rec_tags: Any?,
-    val new_rec_tags: List<Any>?,
+    val rec_tags: String?,
+    val new_rec_tags: String?,
     val rank_score: Long?,
     val like: Int?,
     val upic: String?,
@@ -40,7 +42,7 @@ data class VideoBySearch(
     val url: String?,
     val rec_reason: String?,
     val danmaku: Int?,
-    val biz_data: Any?, // 根据需要调整类型
+    val biz_data: String?, // 根据需要调整类型
     val is_charge_video: Int?,
     val vt: Int?,
     val enable_vt: Int?,
@@ -69,5 +71,5 @@ data class VideoBySearch(
     val parent_area_id: Int?,
     val parent_area_name: String?,
     val watched_show: WatchedShow?
-) : Serializable
+) : Parcelable
 

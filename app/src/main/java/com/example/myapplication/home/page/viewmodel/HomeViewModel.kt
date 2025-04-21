@@ -5,20 +5,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.common.bean.VideoCardInfo
+import com.example.myapplication.home.HomeApi
 import com.example.myapplication.http.HttpService
-import com.example.myapplication.home.MainApi
 import com.example.myapplication.service.processor.like.VideoLikeProcessor
+import com.example.myapplication.util.DealDataInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val videoLikeProcessor: VideoLikeProcessor
-): ViewModel() {
+) : ViewModel() {
 
     private val address = "https://api.bilibili.com/"
-    private val service = HttpService.sendHttp(address, MainApi::class.java)
+    private val service = HttpService.sendHttp(address, HomeApi::class.java)
 
     private val _videoListLiveData = MutableLiveData<List<VideoCardInfo>>()
     val videoList: MutableLiveData<List<VideoCardInfo>> get() = _videoListLiveData
@@ -26,18 +29,27 @@ class HomeViewModel @Inject constructor(
     fun fetchVideos() {
         viewModelScope.launch {
             try {
-                val response = service.getVideoData()
+                val response = withContext(Dispatchers.IO) {
+                    service.getVideoData()
+                }
                 if (response.isSuccessful) {
                     val videoTempList = response.body()!!.data.item
+                    _videoListLiveData.postValue(
+                        videoList.value.orEmpty() + DealDataInfo.dealVideoInfo(videoTempList)
+                    )
                 } else {
                     val errorString = response.errorBody()?.string()
-                    Log.e("getVideoInfoFromNetwork", "网络请求视频信息响应失败---${errorString}")
+                    Log.e("fetchVideos", "网络请求视频信息响应失败---${errorString}")
                 }
             } catch (e: Exception) {
                 Log.e("fetchVideos", "Network视频信息请求错误---${e.message}", e)
             }
 
         }
+    }
+
+    fun clearVideo() {
+        _videoListLiveData.value = emptyList()
     }
 
     fun toggleLike(video: VideoCardInfo, callback: (Boolean) -> Unit) {

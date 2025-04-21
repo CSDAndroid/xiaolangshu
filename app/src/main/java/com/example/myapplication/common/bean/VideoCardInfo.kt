@@ -1,7 +1,9 @@
 package com.example.myapplication.common.bean
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class VideoCardInfo(
     val aid: Long,
     val cid: Long,
@@ -13,4 +15,4 @@ data class VideoCardInfo(
     val description: String,
     var isLike: Boolean,
     var isCollect: Boolean
-): Serializable
+): Parcelable

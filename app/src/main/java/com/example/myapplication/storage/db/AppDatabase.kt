@@ -7,7 +7,7 @@ import com.example.myapplication.storage.db.dao.AccountOtherInfoDao
 import com.example.myapplication.storage.db.entity.Account
 import com.example.myapplication.storage.db.entity.AccountOtherInfo
 
-@Database(entities = [Account::class, AccountOtherInfo::class], version = 1, exportSchema = true)
+@Database(entities = [Account::class, AccountOtherInfo::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun accountDao(): AccountDao
     abstract fun accountOtherDao(): AccountOtherInfoDao

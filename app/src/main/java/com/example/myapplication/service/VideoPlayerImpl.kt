@@ -1,19 +1,22 @@
 package com.example.myapplication.service
 
+import androidx.media3.exoplayer.ExoPlayer
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class VideoPlayerImpl @Inject constructor(): VideoPlayer {
+class VideoPlayerImpl @Inject constructor(
+    private val exoPlayer: ExoPlayer
+): VideoPlayer {
     override fun start() {
-        TODO("Not yet implemented")
+        exoPlayer.play()
     }
 
     override fun pause() {
-        TODO("Not yet implemented")
+        exoPlayer.pause()
     }
 
     override fun stop() {
-        TODO("Not yet implemented")
+        exoPlayer.stop()
     }
 }

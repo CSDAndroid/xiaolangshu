@@ -10,17 +10,19 @@ import com.example.myapplication.common.bean.VideoCardInfo
 import com.example.myapplication.databinding.ActivityAfterSearchBinding
 import com.example.myapplication.search.SearchViewModel
 import com.example.myapplication.util.SpaceItem
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AfterSearch : AppCompatActivity() {
 
     private lateinit var binding: ActivityAfterSearchBinding
     private val viewModel by viewModels<SearchViewModel>()
 
     private var isLoading: Boolean = false
-    private var key: String =  intent.getStringExtra("comment").toString()
+    private var keyword: String =  intent.getStringExtra("keyword").toString()
 
-    private val mAdapter = PreVideoViewAdapter { video, position ->
-        toggleLike(video, position)
+    private val mAdapter = PreVideoViewAdapter { video ->
+        toggleLike(video)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,11 +41,11 @@ class AfterSearch : AppCompatActivity() {
     }
 
     private fun search() {
-        binding.afterSearchComment.setText(key)
+        binding.afterSearchComment.setText(keyword)
         binding.afterSearchSearch.setOnClickListener {
             mAdapter.clearVideoList()
-            key = binding.afterSearchComment.text.toString()
-            viewModel.getVideoListFromNetWorkByKey(key)
+            keyword = binding.afterSearchComment.text.toString()
+            viewModel.fetchSearchVideos(keyword)
         }
     }
 
@@ -54,7 +56,7 @@ class AfterSearch : AppCompatActivity() {
                 isLoading = false
             }
         }
-        viewModel.getVideoListFromNetWorkByKey(key)
+        viewModel.fetchSearchVideos(keyword)
     }
 
     private fun initRecycleView() {
@@ -67,24 +69,25 @@ class AfterSearch : AppCompatActivity() {
                     super.onScrolled(recyclerView, dx, dy)
                     if (!recyclerView.canScrollVertically(1) && !isLoading) {
                         isLoading = true
-                        viewModel.getVideoListFromNetWorkByKey(key)
+                        viewModel.fetchSearchVideos(keyword)
                     }
                 }
             })
         }
     }
 
-    private fun toggleLike(video: VideoCardInfo, position: Int) {
+    private fun toggleLike(video: VideoCardInfo) {
         val newStatus = !video.isLike
         val newLikeNumber = video.like + if (newStatus) +1 else -1
         val newVideo = video.copy(isLike = newStatus, like = newLikeNumber)
+        mAdapter.updateVideoList(newVideo)
         viewModel.updateLikeVideo(newVideo)
-        mAdapter.notifyItemChanged(position)
+
 
         viewModel.toggleLike(video) { success ->
             if (!success) {
+                mAdapter.updateVideoList(video)
                 viewModel.updateLikeVideo(video)
-                mAdapter.notifyItemChanged(position)
             }
         }
     }

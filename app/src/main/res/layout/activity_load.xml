@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/md_theme_surfaceContainer"
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,7 +19,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/_chevron_left2" />
+            android:src="@drawable/_chevron_left1" />
 
         <View
             android:layout_width="0dp"
@@ -217,7 +218,7 @@
                 android:layout_marginTop="20dp"
                 android:background="#E8E6E6"
                 android:scaleType="centerInside"
-                android:src="@drawable/add2" />
+                android:src="@drawable/add" />
 
         </LinearLayout>
 

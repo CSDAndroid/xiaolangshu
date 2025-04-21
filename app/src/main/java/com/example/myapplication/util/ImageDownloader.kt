@@ -8,7 +8,6 @@ import android.net.NetworkCapabilities
 import android.os.Environment
 import android.util.Log
 import com.bumptech.glide.Glide
-import com.example.myapplication.lister.ImageDownLoadCallBack
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,6 +16,10 @@ import java.io.File
 import java.io.FileOutputStream
 
 class ImageDownloader {
+    interface ImageDownLoadCallBack {
+        fun onDownLoadSuccess(text: String)
+        fun onDownLoadFailed(text: String)
+    }
 
     private var currentFile: File? = null
 

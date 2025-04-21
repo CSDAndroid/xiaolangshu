@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -61,8 +63,8 @@ android {
 
 dependencies {
 
-    implementation ("com.google.dagger:hilt-android:2.40.1")
-    kapt ("com.google.dagger:hilt-android-compiler:2.40.1")
+    implementation ("com.google.dagger:hilt-android:2.48.1")
+    kapt ("com.google.dagger:hilt-android-compiler:2.48.1")
 
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
@@ -81,8 +83,9 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.13.0")
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
 
-    implementation("androidx.media3:media3-ui:1.4.1")
-    implementation("androidx.media3:media3-exoplayer:1.4.1")
+    implementation("androidx.media3:media3-ui:1.6.0")
+    implementation("androidx.media3:media3-common:1.6.0")
+    implementation("androidx.media3:media3-exoplayer:1.6.0")
 
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")

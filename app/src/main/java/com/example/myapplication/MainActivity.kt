@@ -14,8 +14,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.account.op.OP
 import com.example.myapplication.account.service.UserService
 import com.example.myapplication.common.adapter.MAdapter
-import com.example.myapplication.databinding.ActivityMainBinding
-import com.example.myapplication.home.home.MainFragment
+import com.example.myapplication.databinding.ActivityHomeBinding
+import com.example.myapplication.home.home.HomeFragment
 import com.example.myapplication.mine.home.MineFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -23,7 +23,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityHomeBinding
     private lateinit var fragments: List<Fragment>
     private val PERMISSION_REQUEST_CODE = 1
 
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // 检查并请求权限
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             requestPermissions()
         }
 
-        judgeIsLogin()
+//        judgeIsLogin()
         initViewPager()
         initRadioGroup()
     }
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViewPager() {
         binding.mainViewPager.run {
-            fragments = listOf(MainFragment(), MineFragment())
+            fragments = listOf(HomeFragment(), MineFragment())
             adapter = MAdapter(supportFragmentManager, lifecycle, fragments)
             isUserInputEnabled = false
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

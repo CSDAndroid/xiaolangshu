@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivitySearchBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class Search : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
@@ -18,7 +20,7 @@ class Search : AppCompatActivity() {
 
         binding.searchSearch.setOnClickListener {
             val intent = Intent(this, AfterSearch::class.java)
-            intent.putExtra("comment", binding.searchComment.text.toString())
+            intent.putExtra("keyword", binding.searchComment.text.toString())
             startActivity(intent)
         }
     }

@@ -8,8 +8,11 @@ import com.example.myapplication.account.service.UserService
 import com.example.myapplication.common.bean.VideoCardInfo
 import com.example.myapplication.http.HttpService
 import com.example.myapplication.service.processor.like.VideoLikeProcessor
+import com.example.myapplication.util.DealDataInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,23 +31,28 @@ class SearchViewModel @Inject constructor(
         return userService.getPhone()
     }
 
-    fun getVideoListFromNetWorkByKey(key: String) {
+    fun fetchSearchVideos(key: String) {
         viewModelScope.launch {
             try {
-                val response = service.getVideoDataByKey(key)
+                val response = withContext(Dispatchers.IO) {
+                    service.getVideoDataByKey(key)
+                }
                 if (response.isSuccessful) {
                     if (response.body() != null) {
                         val resultList = response.body()!!.data.result
                         if (resultList.isNotEmpty() && resultList.size > 11 && resultList[11].data.isNotEmpty()) {
                             val videoTempListBySearch = resultList[11].data
+                            _videoListFromSearchLiveData.postValue(
+                                videoListFromSearch.value.orEmpty() + DealDataInfo.dealVideoInfo(videoTempListBySearch)
+                            )
                         }
                     }
                 } else {
                     val errorString = response.errorBody()?.string()
-                    Log.e("getVideoListFromNetWorkByKey", "网络请求关键词视频信息响应失败---${errorString}")
+                    Log.e("fetchSearchVideos", "网络请求关键词视频信息响应失败---${errorString}")
                 }
             } catch (e: Exception) {
-                Log.e("getVideoListFromNetWorkByKey", "Network请求错误---${e.message}", e)
+                Log.e("fetchSearchVideos", "Network请求错误---${e.message}", e)
             }
         }
     }

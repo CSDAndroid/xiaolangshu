@@ -6,7 +6,9 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityUserProfileEditBinding
 import com.example.myapplication.storage.db.entity.Account
 import com.example.myapplication.util.ImageDealHelper
@@ -31,6 +33,9 @@ class UserProfileEdit : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUserProfileEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        window.statusBarColor =
+            ContextCompat.getColor(this, R.color.md_theme_surfaceContainer)
 
         setupToolbar()
         observeViewModel()

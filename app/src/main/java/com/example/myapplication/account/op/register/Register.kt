@@ -13,7 +13,9 @@ import com.example.myapplication.MainActivity
 import com.example.myapplication.account.bean.RegisterRequest
 import com.example.myapplication.databinding.ActivityRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class Register : AppCompatActivity(), View.OnClickListener {
@@ -59,7 +61,10 @@ class Register : AppCompatActivity(), View.OnClickListener {
 
                 lifecycleScope.launch {
                     try {
-                        standVerificationCode = viewModel.sendVerificationCode(binding.resPhone.text.toString(), binding.resNickname.text.toString())
+                        standVerificationCode = withContext(Dispatchers.IO) {
+                            viewModel.sendVerificationCode(binding.resPhone.text.toString(), binding.resNickname.text.toString())
+                        }
+                        Toast.makeText(this@Register, "验证码：${standVerificationCode}",Toast.LENGTH_SHORT).show()
                     } catch (e: Exception) {
                         Toast.makeText(this@Register, "网络错误，请稍后再试", Toast.LENGTH_SHORT).show()
                     }
@@ -96,13 +101,16 @@ class Register : AppCompatActivity(), View.OnClickListener {
             lifecycleScope.launch {
                 try {
                     val registerRequest = RegisterRequest(nickname, telephone, pwd, verificationCode)
-                    if (viewModel.register(registerRequest)) {
+                    val result = withContext(Dispatchers.IO) {
+                        viewModel.register(registerRequest)
+                    }
+                    if (result) {
                         Toast.makeText(this@Register, "注册成功", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@Register, MainActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this@Register, "注册失败，该手机号已注册", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@Register, "注册失败", Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     Toast.makeText(this@Register, "网络错误，请稍后再试", Toast.LENGTH_SHORT).show()
